@@ -12,9 +12,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if (getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(R.layout.activity_landscape);
-        } else {
             setContentView(R.layout.activity_portrait);
+        } else {
+            setContentView(R.layout.activity_landscape);
         }
         //this leaves the keyboard hidden on load
         getWindow().setSoftInputMode(

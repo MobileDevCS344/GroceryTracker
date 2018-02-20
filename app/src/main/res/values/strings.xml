@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Grocery Tracker</string>
+    <string name="button_new_list">Create New Grocery List</string>
+    <string name="button_prev_lists">View Previous Grocery Lists</string>
+    <string name="textview_bar_graph">Bar Graph</string>
+    <string name="textview_line_graph">Line Graph</string>
 </resources>
