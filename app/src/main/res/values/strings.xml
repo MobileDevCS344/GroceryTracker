@@ -4,4 +4,13 @@
     <string name="button_prev_lists">View Previous Grocery Lists</string>
     <string name="textview_bar_graph">Bar Graph</string>
     <string name="textview_line_graph">Line Graph</string>
+    <string name="textview_prev_lists">Previous Lists from Database</string>
+    <string name="button_add_items">Add Items</string>
+    <string name="button_save_list">Save List</string>
+    <string name="edit_text_list_name">List Name</string>
+    <string name="button_recent">Recent Items</string>
+    <string name="textview_list_placeholder">List of items (Placeholder and Fragment)</string>
+    <string name="edit_text_store">Store Info</string>
+    <string name="edit_text_date">Date</string>
+    <string name="edit_text_budget">Budget</string>
 </resources>
