@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Grocery Tracker</string>
-    <string name="button_new_list">Create New Grocery List</string>
-    <string name="button_prev_lists">View Previous Grocery Lists</string>
+    <string name="button_new_list">Create New List</string>
+    <string name="button_prev_lists">View Previous Lists</string>
     <string name="textview_bar_graph">Bar Graph</string>
     <string name="textview_line_graph">Line Graph</string>
     <string name="textview_prev_lists">Previous Lists from Database</string>
@@ -13,4 +13,15 @@
     <string name="edit_text_store">Store Info</string>
     <string name="edit_text_date">Date</string>
     <string name="edit_text_budget">Budget</string>
+    <string name="number_quantity"># Quantity</string>
+    <string name="number_price"># Price</string>
+    <string name="textview_quantity">Quantity</string>
+    <string name="textview_price">Price</string>
+    <string name="button_add_item">Add Item To List</string>
+    <string name="textview_carbs">Carbs</string>
+    <string name="texetview_protein">Protein</string>
+    <string name="textview_fat">Fat</string>
+    <string name="textview_other">Other</string>
+    <string name="autoComplete_categories">Categories</string>
+    <string name="edit_text_item">Item</string>
 </resources>
