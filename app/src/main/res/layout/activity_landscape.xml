@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,28 +21,30 @@
         android:layout_marginLeft="168dp">
 
         <Button
-            android:id="@+id/button3"
-            style="@style/Widget.AppCompat.Button.Colored"
+            android:id="@+id/button_newList"
+            style="@android:style/Widget.Material.Light.Button.Inset"
             android:layout_width="206dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/button_new_list"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            tools:targetApi="lollipop" />
 
         <Button
             android:id="@+id/button_oldLists"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@android:style/Widget.Material.Light.Button.Inset"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/button_prev_lists"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            tools:targetApi="lollipop" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout_stats"
         android:layout_width="407dp"
-        android:layout_height="230dp"
+        android:layout_height="183dp"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="168dp"
         android:orientation="horizontal"
@@ -64,7 +67,7 @@
 
     <LinearLayout
         android:layout_width="148dp"
-        android:layout_height="295dp"
+        android:layout_height="286dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
@@ -84,4 +87,17 @@
             android:layout_height="33dp"
             android:text="@string/textview_prev_lists" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buton_view_stats"
+        style="@android:style/Widget.Material.Light.Button.Inset"
+        android:layout_width="405dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/button_view_stats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="lollipop"
+        android:layout_marginRight="16dp" />
 </android.support.constraint.ConstraintLayout>

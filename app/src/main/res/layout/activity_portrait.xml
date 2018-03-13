@@ -22,19 +22,26 @@
 
         <Button
             android:id="@+id/button_newList"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@android:style/Widget.Material.Light.Button.Inset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/button_new_list"
-            android:textColor="@android:color/black" />
+            tools:targetApi="lollipop" />
 
         <Button
             android:id="@+id/button_oldLists"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@android:style/Widget.Material.Light.Button.Inset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_prev_lists"
-            android:textColor="@android:color/black" />
+            android:text="@string/button_prev_lists" tools:targetApi="lollipop" />
+
+        <Button
+            android:id="@+id/buton_view_stats"
+            style="@android:style/Widget.Material.Light.Button.Inset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_view_stats"
+            tools:targetApi="lollipop" />
 
         <TextView
             android:id="@+id/textView_recent_purchases"
