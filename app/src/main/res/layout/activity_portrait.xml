@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.yangm89.grocerytracker.MainActivity">
+    tools:context="com.example.yangm89.grocerytracker.MainActivity"
+    tools:layout_editor_absoluteY="25dp">
 
     <LinearLayout
         android:id="@+id/linearLayout_main"
         android:layout_width="368dp"
-        android:layout_height="490dp"
+        android:layout_height="468dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -20,40 +21,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/button_newList"
-            style="@android:style/Widget.Material.Light.Button.Inset"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/button_new_list"
-            tools:targetApi="lollipop" />
-
-        <Button
-            android:id="@+id/button_oldLists"
-            style="@android:style/Widget.Material.Light.Button.Inset"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/button_prev_lists" tools:targetApi="lollipop" />
-
-        <Button
-            android:id="@+id/buton_view_stats"
-            style="@android:style/Widget.Material.Light.Button.Inset"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/button_view_stats"
-            tools:targetApi="lollipop" />
-
         <TextView
             android:id="@+id/textView_recent_purchases"
             android:layout_width="match_parent"
-            android:layout_height="178dp"
+            android:layout_height="167dp"
             android:text="@string/textview_line_graph" />
 
         <TextView
             android:id="@+id/textView_spending"
             android:layout_width="match_parent"
-            android:layout_height="215dp"
+            android:layout_height="152dp"
             android:text="@string/textview_bar_graph" />
+
+        <Button
+            android:id="@+id/buton_view_stats"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/button_view_stats"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:id="@+id/button_oldLists"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="@string/button_prev_lists"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:id="@+id/button_newList"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/button_new_list"
+            tools:targetApi="lollipop" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_back_home"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/button_home"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

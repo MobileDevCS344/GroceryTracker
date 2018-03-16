@@ -11,33 +11,34 @@
         android:layout_width="408dp"
         android:layout_height="45dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="168dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="156dp"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout_stats"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_marginLeft="168dp">
+        app:layout_constraintVertical_bias="0.595">
 
         <Button
             android:id="@+id/button_newList"
-            style="@android:style/Widget.Material.Light.Button.Inset"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="206dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_green_dark"
             android:text="@string/button_new_list"
-            android:textColor="@android:color/black"
             tools:targetApi="lollipop" />
 
         <Button
             android:id="@+id/button_oldLists"
-            style="@android:style/Widget.Material.Light.Button.Inset"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorAccent"
             android:text="@string/button_prev_lists"
-            android:textColor="@android:color/black"
             tools:targetApi="lollipop" />
     </LinearLayout>
 
@@ -90,14 +91,28 @@
 
     <Button
         android:id="@+id/buton_view_stats"
-        style="@android:style/Widget.Material.Light.Button.Inset"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="405dp"
         android:layout_height="46dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="112dp"
+        android:backgroundTint="@color/colorPrimary"
         android:text="@string/button_view_stats"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="lollipop"
-        android:layout_marginRight="16dp" />
+        tools:targetApi="lollipop" />
+
+    <Button
+        android:id="@+id/button_back_home"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/button_home"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

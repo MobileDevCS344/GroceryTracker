@@ -7,16 +7,16 @@
 
     <Button
         android:id="@+id/button_login2"
-        style="@android:style/Widget.Material.Light.Button.Inset"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="208dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:layout_marginTop="236dp"
+        android:backgroundTint="@color/colorPrimary"
         android:text="@string/button_login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="lollipop"
-        android:layout_marginLeft="192dp" />
+        tools:targetApi="lollipop" />
 
     <EditText
         android:id="@+id/edittext_login"
