@@ -13,10 +13,12 @@
         android:layout_marginStart="192dp"
         android:layout_marginTop="236dp"
         android:backgroundTint="@color/colorPrimary"
+        android:onClick="homeActivity"
         android:text="@string/button_login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="lollipop" />
+        tools:targetApi="lollipop"
+        android:layout_marginLeft="192dp" />
 
     <EditText
         android:id="@+id/edittext_login"
@@ -74,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="260dp"
-        android:contentDescription="App Logo"
+        android:contentDescription="@string/content_desc_logo"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
