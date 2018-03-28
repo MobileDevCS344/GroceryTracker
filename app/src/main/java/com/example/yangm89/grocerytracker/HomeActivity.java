@@ -1,8 +1,10 @@
 package com.example.yangm89.grocerytracker;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 
 
@@ -19,5 +21,10 @@ public class HomeActivity extends AppCompatActivity {
         //this leaves the keyboard hidden on load
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    }
+
+    public void optionsActivity(View view){
+        Intent intent = new Intent(this, OptionsActivity.class);
+        startActivity(intent);
     }
 }
