@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/button_view_stats"
+            android:onClick="viewStatsActivity"
             tools:targetApi="lollipop" />
 
         <Button
@@ -49,6 +50,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/holo_green_dark"
             android:text="@string/button_prev_lists"
+            android:onClick="viewPrevListsActivity"
             tools:targetApi="lollipop" />
 
         <Button
@@ -58,6 +60,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/button_new_list"
+            android:onClick="newListActivity"
             tools:targetApi="lollipop" />
     </LinearLayout>
 

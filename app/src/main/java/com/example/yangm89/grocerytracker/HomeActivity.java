@@ -27,4 +27,19 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, OptionsActivity.class);
         startActivity(intent);
     }
+
+    public void viewPrevListsActivity(View view){
+        Intent intent = new Intent(this, PreviousListsActivity.class);
+        startActivity(intent);
+    }
+
+    public void newListActivity(View view){
+        Intent intent = new Intent(this, NewListActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewStatsActivity(View view){
+        Intent intent = new Intent(this, MoreStatsActivity.class);
+        startActivity(intent);
+    }
 }
