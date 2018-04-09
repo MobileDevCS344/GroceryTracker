@@ -1,8 +1,10 @@
 package com.example.yangm89.grocerytracker;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -29,6 +31,14 @@ public class ListItemActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.array_category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+    }
+
+    public void backToNewListActivity(View view){
+        Intent intent = new Intent(this, NewListActivity.class);
+        String category = ((Spinner) findViewById(R.id.spinner_category)).getSelectedItem().toString();
+        intent.putExtra(Constants.keyCategoryName, category);
+        startActivity(intent);
+        finish();
     }
 
 }

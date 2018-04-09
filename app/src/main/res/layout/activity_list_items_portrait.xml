@@ -26,16 +26,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/number_quantity" />
 
-    <TextView
-        android:id="@+id/textView_category2"
-        android:layout_width="189dp"
-        android:layout_height="17dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:text="@string/spinner_category"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
     <EditText
         android:id="@+id/edit_text_item"
         android:layout_width="359dp"
@@ -58,6 +48,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="500dp"
         android:backgroundTint="@color/colorPrimary"
+        android:onClick="backToNewListActivity"
         android:text="@string/button_add_item"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
