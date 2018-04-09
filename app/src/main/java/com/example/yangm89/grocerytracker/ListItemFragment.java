@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 
 public class ListItemFragment extends Fragment {
     private ListItemFragment.OnFragmentInteractionListener mListener;
@@ -34,6 +36,9 @@ public class ListItemFragment extends Fragment {
 
     public void onResume() {
         super.onResume();
+        String temp = mListener.updateItemList();
+        TextView list = ((TextView) getActivity().findViewById(R.id.textview_list_items));
+        list.setText(temp);
     }
 
     @Override
@@ -55,6 +60,6 @@ public class ListItemFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         //3 - Ensure the activity implements this activity
-
+        String updateItemList();
     }
 }

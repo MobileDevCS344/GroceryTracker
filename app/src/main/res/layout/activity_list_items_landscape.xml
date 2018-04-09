@@ -175,6 +175,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="4dp"
         android:backgroundTint="@color/colorPrimaryDark"
+        android:onClick="backToHomeActivity"
         android:text="@string/button_home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -104,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="none|text|textPassword" />
+            android:inputType="textPassword" />
 
         <TextView
             android:id="@+id/textview_password"
@@ -123,6 +123,7 @@
             android:id="@+id/textView_retype_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:text="@string/retype_password" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
