@@ -42,29 +42,35 @@ public class SignUpActivity extends AppCompatActivity {
         //need to add code to send info about account to database
         String username = ((EditText)findViewById(R.id.editText_email)).getText().toString();
         String password = ((EditText)findViewById(R.id.editText_password)).getText().toString();
+        String verifyPassword = ((EditText) findViewById(R.id.editText_retype_password)).getText().toString();
 
         //currently accepting any email to sign up
         if(validateEmail(username)){
-            if(password.length() >= 6){
-                if(isTextValid(password)){
-                    intent.putExtra(Constants.keyEmailName, username);
-                    startActivity(intent);
+            if(password.equals(verifyPassword)){
+                if(password.length() >= 6){
+                    if(isTextValid(password)){
+                        intent.putExtra(Constants.keyEmailName, username);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(this,
+                                "Password must contain a capital letter, lowercase letter, and a number",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
                     Toast.makeText(this,
-                            "Password must contain a capital letter, lowercase letter, and a number",
+                            "Password must contain at least 6 characters",
                             Toast.LENGTH_SHORT).show();
                 }
             }
             else {
-                Toast.makeText(this,
-                        "Password must contain at least 6 characters",
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Passwords must match", Toast.LENGTH_SHORT).show();
             }
         }
         else {
             Toast.makeText(this,
-                    "Username must contain at least 4 characters",
+                    "Email is ivalid.",
                     Toast.LENGTH_SHORT).show();
         }
     }
