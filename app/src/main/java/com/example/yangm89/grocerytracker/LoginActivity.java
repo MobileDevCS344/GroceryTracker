@@ -31,6 +31,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +59,27 @@ public class LoginActivity extends AppCompatActivity {
     //start a new activity when login button is clicked
     public void homeActivity(View view){
         Intent intent = new Intent(this, HomeActivity.class);
-        //code to check login
-        startActivity(intent);
+        String username = ((EditText)findViewById(R.id.edittext_username)).getText().toString();
+        String password = ((EditText)findViewById(R.id.edittext_password)).getText().toString();
+
+        //current default email : test@test.com
+        //current password: Test1
+        if(username.equals("test@test.com")){
+            if(password.equals("Test1")){
+                intent.putExtra(Constants.keyEmailName, username);
+                startActivity(intent);
+            }
+            else {
+                Toast.makeText(this,
+                        "Incorrect username and password",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Toast.makeText(this,
+                    "Incorrect username and password",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
