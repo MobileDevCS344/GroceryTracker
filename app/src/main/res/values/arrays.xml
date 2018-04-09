@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_category">
+        <item>Beef</item>
+        <item>Chicken</item>
+        <item>Bread &amp; Bakery</item>
+        <item>Dairy &amp; Eggs</item>
+        <item>Fish &amp; Shellfish</item>
+        <item>Fruits &amp; Nuts</item>
+        <item>Lamb</item>
+        <item>Pork</item>
+        <item>Ready Meals</item>
+        <item>Sauces &amp; Soup</item>
+        <item>Snacks, Candy, &amp; Dessert</item>
+        <item>Veal</item>
+        <item>Vegetables</item>
+        <item>Other Meat</item>
+        <item>Other</item>
+    </string-array>
+</resources>

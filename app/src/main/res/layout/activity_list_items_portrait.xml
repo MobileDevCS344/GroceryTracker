@@ -6,6 +6,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textView_category"
+        android:layout_width="346dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/spinner_category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
+
+    <Spinner
+        android:id="@+id/spinner_category"
+        android:layout_width="350dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/number_quantity" />
+
+    <TextView
+        android:id="@+id/textView_category2"
+        android:layout_width="189dp"
+        android:layout_height="17dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="@string/spinner_category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
     <EditText
         android:id="@+id/edit_text_item"
         android:layout_width="359dp"
@@ -18,7 +48,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="12dp" />
 
     <Button
         android:id="@+id/button_add_item_to_list"
@@ -68,7 +99,6 @@
         android:layout_height="19dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
         android:text="@string/textview_price"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +110,6 @@
         android:layout_height="17dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="24dp"
         android:text="@string/textview_quantity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -95,7 +124,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="8dp">
 
         <LinearLayout
             android:layout_width="177dp"
@@ -166,18 +196,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <AutoCompleteTextView
-        android:id="@+id/autoComplete_category"
-        android:layout_width="359dp"
-        android:layout_height="43dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginTop="196dp"
-        android:text="@string/autoComplete_categories"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/button_back_home"
         style="@style/Widget.AppCompat.Button.Colored"
@@ -188,6 +206,7 @@
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/button_home"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="8dp" />
 
 </android.support.constraint.ConstraintLayout>

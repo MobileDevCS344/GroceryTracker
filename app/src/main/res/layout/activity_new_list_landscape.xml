@@ -76,6 +76,7 @@
         android:layout_marginBottom="72dp"
         android:layout_marginStart="16dp"
         android:backgroundTint="@color/colorPrimary"
+        android:onClick="listItemActivity"
         android:text="@string/button_add_items"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -22,7 +22,7 @@
     <string name="texetview_protein">Protein</string>
     <string name="textview_fat">Fat</string>
     <string name="textview_other">Other</string>
-    <string name="autoComplete_categories">Categories</string>
+    <string name="spinner_category">Category</string>
     <string name="edit_text_item">Item</string>
     <string name="button_view_stats">View More Statistics</string>
     <string name="textview_stats_list_holder">Clickable lists appear here</string>
