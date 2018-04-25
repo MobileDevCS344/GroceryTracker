@@ -1,6 +1,7 @@
 package com.example.yangm89.grocerytracker;
 
 
+import android.app.LauncherActivity;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,9 +18,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class NewListActivity extends AppCompatActivity implements
-        ListItemFragment.OnFragmentInteractionListener {
+        ListItemFragment.OnFragmentInteractionListener, ListItemSpecificsFragment.OnFragmentInteractionListener {
     private String itemName;
     private ListItemFragment listItemFragment;
+    private ListItemFragment listFragment ;
+    private ListItemSpecificsFragment itemSpecificsFragment ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,26 +38,13 @@ public class NewListActivity extends AppCompatActivity implements
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         //adds item fragment
-        ListItemFragment listFragment = new ListItemFragment();
-        android.support.v4.app.FragmentTransaction fragmentTransaction =
+        listFragment = new ListItemFragment();
+        FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fragment_list_item_container, listFragment);
         fragmentTransaction.commit();
 
-        //check if previous activity is ListItemActivity
-        Intent intent = getIntent();
-        String previousActivity = intent.getStringExtra(Constants.keyListItemActivity);
-
-        if(previousActivity != null){
-            if(!previousActivity.equals("")){
-                String itemName = intent.getStringExtra(Constants.keyItemNewListName);
-                UniversalTables.items.add(itemName);
-                updateItemList();
-
-            }
-        }
-
-
+        //instantiate items arraylist
     }
 
     @Override
@@ -62,9 +53,11 @@ public class NewListActivity extends AppCompatActivity implements
     }
 
     public void listItemActivity(View view){
-        Intent intent = new Intent(this, ListItemActivity.class);
-        startActivity(intent);
-
+        //create code for fragment transaction
+        itemSpecificsFragment = new ListItemSpecificsFragment() ;
+        FragmentTransaction f = getSupportFragmentManager().beginTransaction() ;
+        f.replace(R.id.fragment_list_item_container, itemSpecificsFragment) ;
+        f.commit() ;
     }
 
     public void backToHomeActivity(View view){
@@ -81,4 +74,26 @@ public class NewListActivity extends AppCompatActivity implements
 
         return sb.toString();
     }
+
+    public void backToNewListActivity(View view){
+        String item = ((EditText)findViewById(R.id.editText_item)).getText().toString();
+
+        if(item.equals("")){
+            Toast.makeText(this, "An item name is required.", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            addItemToList(item);
+
+            listFragment = new ListItemFragment();
+            FragmentTransaction f = getSupportFragmentManager().beginTransaction();
+            f.replace(R.id.fragment_list_item_container, listFragment);
+            f.commit();
+        }
+    }
+
+    public void addItemToList(String item){
+        UniversalTables.items.add(item);
+    }
+
+
 }

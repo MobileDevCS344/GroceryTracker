@@ -34,7 +34,6 @@
         <activity android:name=".PreviousListsActivity"/>
         <activity android:name=".NewListActivity"/>
         <activity android:name=".MoreStatsActivity"/>
-        <activity android:name=".ListItemActivity"/>
     </application>
 
 </manifest>
