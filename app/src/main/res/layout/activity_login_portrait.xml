@@ -28,7 +28,7 @@
             android:id="@+id/textview_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/prompt_email" />
+            android:text="@string/textview_username" />
 
         <EditText
             android:id="@+id/edittext_password"
@@ -49,15 +49,15 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="208dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="88dp"
         android:layout_marginStart="88dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/colorPrimary"
-        android:onClick="homeActivity"
+        android:onClick="login"
         android:text="@string/button_login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
-        tools:targetApi="lollipop"
-        android:layout_marginLeft="88dp" />
+        tools:targetApi="lollipop" />
 
     <ImageView
         android:id="@+id/imageView"

@@ -33,6 +33,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,29 +63,43 @@ public class LoginActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
-    //start a new activity when login button is clicked
-    public void homeActivity(View view){
-        Intent intent = new Intent(this, HomeActivity.class);
-        String username = ((EditText)findViewById(R.id.edittext_username)).getText().toString();
-        String password = ((EditText)findViewById(R.id.edittext_password)).getText().toString();
+    //check username and password and login
+    public void login(View view) {
+        final String username = ((EditText)findViewById(R.id.edittext_username)).getText().toString();
+        final String password = ((EditText)findViewById(R.id.edittext_password)).getText().toString();
 
-        //current default email : test@test.com
-        //current password: Test1
-        if(username.equals("test@test.com")){
-            if(password.equals("Test1")){
-                intent.putExtra(Constants.keyEmailName, username);
-                startActivity(intent);
+        if(!username.equals("") && !password.equals("")) {
+            RequestQueue queue = Volley.newRequestQueue(this);
+
+            String url = Constants.root_url + "login_query.php?username=" + username + "&password=" + password;
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (response.equals("The username does not exist.")) {
+                                Toast.makeText(LoginActivity.this, "The username " + username + " does not exist. " +
+                                        "Please register first.", Toast.LENGTH_SHORT).show();
+                            } else if (response.equals("Successfully logged in.")) {
+                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                intent.putExtra(Constants.keyUsername, username);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    Toast.makeText(LoginActivity.this, "There was an error connecting to the database. Please try again later.", Toast.LENGTH_SHORT).show();
+                }
             }
-            else {
-                Toast.makeText(this,
-                        "Incorrect username and password",
-                        Toast.LENGTH_SHORT).show();
-            }
+            );
+
+            queue.add(stringRequest);
         }
         else {
-            Toast.makeText(this,
-                    "Incorrect username and password",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Username and password are required.", Toast.LENGTH_SHORT).show() ;
         }
     }
 

@@ -33,7 +33,7 @@
             android:text="@string/name" />
 
         <EditText
-            android:id="@+id/editText_email"
+            android:id="@+id/editText_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -46,23 +46,11 @@
             android:text="@string/textview_username" />
 
         <EditText
-            android:id="@+id/date_birthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="date" />
-
-        <TextView
-            android:id="@+id/textView_birthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/birthday" />
-
-        <EditText
             android:id="@+id/editText_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:contentDescription="@string/password_hint"
             android:inputType="textPassword" />
 
         <TextView
@@ -93,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:onClick="createAccountActivity"
+        android:onClick="register"
         android:text="@string/button_create_acct"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

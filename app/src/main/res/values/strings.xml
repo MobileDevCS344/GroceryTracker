@@ -28,7 +28,7 @@
     <string name="textview_stats_list_holder">Clickable lists appear here</string>
     <string name="textview_preview_holder">Preview of List Items</string>
     <string name="textview_stats_placeholder">Statistics appear here</string>
-    <string name="textview_username">Email</string>
+    <string name="textview_username">Username</string>
     <string name="textview_password">Password</string>
     <string name="button_login">Login</string>
     <string name="button_signup">Sign Up</string>
@@ -45,17 +45,16 @@
     <string name="button_logout">Log Out</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email Address</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="password_hint">Passwords must contain at least 1 lowercase letter, 1 uppercase letter, and 1 digit</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->

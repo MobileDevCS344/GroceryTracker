@@ -21,17 +21,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView_recent_purchases"
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graphView_bar_graph"
             android:layout_width="match_parent"
-            android:layout_height="167dp"
-            android:text="@string/textview_line_graph" />
+            android:layout_height="160dp" />
 
-        <TextView
-            android:id="@+id/textView_spending"
+        <com.jjoe64.graphview.GraphView
             android:layout_width="match_parent"
-            android:layout_height="152dp"
-            android:text="@string/textview_bar_graph" />
+            android:layout_height="160dp"
+            android:id="@+id/graphView_line_graph" />
 
         <Button
             android:id="@+id/buton_view_stats"

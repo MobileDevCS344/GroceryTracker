@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     //start a new activity when signup button is pressed
     public void signUpActivity(View view){
-        Intent intent = new Intent(this, SignUpActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
