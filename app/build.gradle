@@ -30,4 +30,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.volley:volley:1.0.0'
     implementation 'com.jjoe64:graphview:4.0.1'
+    implementation 'com.androidplot:androidplot-core:1.5.1'
 }

@@ -3,4 +3,19 @@
     <color name="colorPrimary">#55ba71</color>
     <color name="colorPrimaryDark">#55ba71</color>
     <color name="colorAccent">#87b401</color>
+    <color name="beefColor">#8b8989</color>
+    <color name="chickenColor">#cdb79e</color>
+    <color name="breadColor">#c1cdc1</color>
+    <color name="dairyColor">#2f4f4f</color>
+    <color name="fishColor">#6a5acd</color>
+    <color name="fruitsColor">#00bfff</color>
+    <color name="lambColor">#32cd32</color>
+    <color name="porkColor">#ffff00</color>
+    <color name="readyColor">#cd5c5c</color>
+    <color name="saucesColor">#ffa500</color>
+    <color name="snacksColor">#ff1493</color>
+    <color name="vealColor">#da70d6</color>
+    <color name="vegColor">#7fffd4</color>
+    <color name="meatOtherColor">#0000cd</color>
+    <color name="otherColor">#ffe4e1</color>
 </resources>

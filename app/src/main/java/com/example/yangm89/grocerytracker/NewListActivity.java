@@ -4,6 +4,9 @@ package com.example.yangm89.grocerytracker;
 import android.app.DownloadManager;
 import android.app.LauncherActivity;
 import android.app.usage.ConfigurationStats;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentTransaction;
@@ -70,6 +73,8 @@ public class NewListActivity extends AppCompatActivity implements
 
             listItemsVisible = true;
         }
+
+        //need to add local database that will keep all of the user's listnames so that there are no duplicates
     }
 
     @Override
@@ -273,6 +278,11 @@ public class NewListActivity extends AppCompatActivity implements
 
     public void saveList(View view)
     {
+        MyDBContract.MyDbHelper mdbh = new MyDBContract.MyDbHelper(getApplicationContext());
+        SQLiteDatabase db = mdbh.getWritableDatabase();
+        SQLiteDatabase rdb = mdbh.getReadableDatabase();
+        ContentValues values = new ContentValues();
+
         String listName = ((EditText) findViewById(R.id.editText_list_name)).getText().toString() ;
         list = listName ;
         String storeName = ((EditText) findViewById(R.id.editText_store_info)).getText().toString() ;
@@ -286,43 +296,57 @@ public class NewListActivity extends AppCompatActivity implements
 
         if(!listName.equals("") && !storeName.equals("") && !date.equals(""))
         {
-            if(checkDateFormat(date))
-            {
-                String[] dateArr = date.split("/") ;
-                sqlDate = dateArr[2] + "-" + dateArr[0] +"-" + dateArr[1] ;
-                String url = Constants.root_url + "save_list.php?username=" + username + "&listname=" + listName
-                        + "&store=" + storeName + "&date=" + sqlDate + "&budget=" + budget;
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                if(response.equals("Successfully inserted into database."))
-                                {
-                                   // Toast.makeText(NewListActivity.this, response, Toast.LENGTH_SHORT).show() ;
+            //check local database if listname exists
+            String selection = MyDBContract.DBEntry.COLUMN_NAME_LISTS + " GLOB ? " ;
+            String[] selectionArgs = { listName } ;
+            String[] projection = { MyDBContract.DBEntry.COLUMN_NAME_LISTS, MyDBContract.DBEntry.COLUMN_NAME_USER_ID } ;
+            String sortOrder = MyDBContract.DBEntry.COLUMN_NAME_LISTS + " DESC" ;
+            Cursor cursor = rdb.query(MyDBContract.DBEntry.TABLE_NAME,
+                    projection,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    sortOrder) ;
 
-                                    new SaveListItemsToDB().execute();
-                                    Intent intent = new Intent(NewListActivity.this, HomeActivity.class) ;
-                                    intent.putExtra(Constants.keyUsername, username) ;
-                                    startActivity(intent) ;
-                                    finish() ;
-                                }
-                                else
-                                {
-                                    Toast.makeText(NewListActivity.this, "Error inserting the list into the databse.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //do something
-                        Toast.makeText(NewListActivity.this, "There was an error connecting to the database.", Toast.LENGTH_SHORT).show() ;
-                    }
-                }) ;
+            if( cursor.getCount() == 0 ) {
+                if (checkDateFormat(date)) {
+                    String[] dateArr = date.split("/");
+                    sqlDate = dateArr[2] + "-" + dateArr[0] + "-" + dateArr[1];
+                    String url = Constants.root_url + "save_list.php?username=" + username + "&listname=" + listName
+                            + "&store=" + storeName + "&date=" + sqlDate + "&budget=" + budget;
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    if (response.equals("Successfully inserted into database.")) {
+                                        // Toast.makeText(NewListActivity.this, response, Toast.LENGTH_SHORT).show() ;
 
-                queue.add(stringRequest) ;
+                                        new SaveListItemsToDB().execute();
+                                        Intent intent = new Intent(NewListActivity.this, HomeActivity.class);
+                                        intent.putExtra(Constants.keyUsername, username);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(NewListActivity.this, "Error inserting the list into the databse.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //do something
+                            Toast.makeText(NewListActivity.this, "There was an error connecting to the database.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    queue.add(stringRequest);
+                } else {
+                    Toast.makeText(this, "Dates need to be in the format : MM/DD/YYYY", Toast.LENGTH_SHORT).show();
+                    ;
+                }
             }
             else {
-                Toast.makeText(this, "Dates need to be in the format : MM/DD/YYYY",Toast.LENGTH_SHORT).show(); ;
+                Toast.makeText(this, "The list name " + listName + " already exists. List names must be unique.", Toast.LENGTH_SHORT).show()  ;
             }
         }
         else

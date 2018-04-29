@@ -8,12 +8,13 @@
     <LinearLayout
         android:layout_width="405dp"
         android:layout_height="96dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="56dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        app:layout_constraintHorizontal_bias="0.898"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/scrollView_prev_list_container"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -50,15 +51,15 @@
         android:layout_width="407dp"
         android:layout_height="183dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="168dp"
-        android:layout_marginStart="168dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toEndOf="@+id/scrollView_prev_list_container">
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/graphView_bar_graph"
-            android:layout_width="227dp"
+        <com.androidplot.pie.PieChart
+            android:id="@+id/graphView_pie_graph"
+            android:layout_width="212dp"
             android:layout_height="match_parent" />
 
         <com.jjoe64.graphview.GraphView
@@ -73,13 +74,15 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="324dp"
         android:layout_marginRight="16dp"
+        android:layout_marginStart="324dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="optionsActivity"
         android:text="@string/button_options"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/scrollView_prev_list_container"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView

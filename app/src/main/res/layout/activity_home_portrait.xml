@@ -21,8 +21,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/graphView_bar_graph"
+        <com.androidplot.pie.PieChart
+            android:id="@+id/graphView_pie_graph"
             android:layout_width="match_parent"
             android:layout_height="160dp" />
 
