@@ -51,6 +51,8 @@
     <string name="button_usage">+</string>
     <string name="textview_remaining_quanityt">Quantity Remaining</string>
     <string name="textview_most_recent_purchase_data">Most Recent Purchase Data</string>
+    <string name="textview_usage_stats">Usage Statistics</string>
+    <string name = "textview_category_statsw">Categories Purchased</string>
     <!-- Strings related to login -->
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
