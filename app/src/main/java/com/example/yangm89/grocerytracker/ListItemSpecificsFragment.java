@@ -45,16 +45,30 @@ public class ListItemSpecificsFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.array_category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-/*
-        String item = ((EditText) getActivity().findViewById(R.id.editText_item)).getText().toString() ;
-        String price = ((EditText) getActivity().findViewById(R.id.number_price)).getText().toString() ;
-        String quantity = ((EditText) getActivity().findViewById(R.id.editText_quantity)).getText().toString() ;
-        String category = ((Spinner) getActivity().findViewById(R.id.spinner_category)).getSelectedItem().toString() ;
-        String protein = ((EditText) getActivity().findViewById(R.id.editText_protein)).getText().toString() ;
-        String fat = ((EditText) getActivity().findViewById(R.id.editText_fat)).getText().toString() ;
-        String carbs = ((EditText) getActivity().findViewById(R.id.editText_carbs)).getText().toString() ;
-        String other = ((EditText) getActivity().findViewById(R.id.editText_other)).getText().toString() ;
-        ItemSpec i = new ItemSpec(item, price, quantity, category, protein, fat, carbs, other ) ; */
+        mListener.setSpinner(spinner);
+
+        if(mListener.getSelectedSpinner() != 0)
+        {
+            int selection = mListener.getSelectedSpinner() ;
+            spinner.setSelection(selection);
+        }
+
+        String itemName = mListener.getItemName();
+        String itemPrice = mListener.getItemPrice();
+        String itemQuantity = mListener.getItemQuantity();
+        String itemProtein = mListener.getItemProtein();
+        String itemCarbs = mListener.getItemCarbs();
+        String itemFat = mListener.getItemFat();
+        String itemOther = mListener.getItemOther();
+
+        ((EditText) getActivity().findViewById(R.id.editText_item)).setText(itemName) ;
+        ((EditText) getActivity().findViewById(R.id.number_price)).setText(itemPrice); ;
+        ((EditText) getActivity().findViewById(R.id.editText_quantity)).setText(itemQuantity) ;
+        ((EditText) getActivity().findViewById(R.id.editText_protein)).setText(itemProtein) ;
+        ((EditText) getActivity().findViewById(R.id.editText_fat)).setText(itemFat); ;
+        ((EditText) getActivity().findViewById(R.id.editText_carbs)).setText(itemCarbs); ;
+        ((EditText) getActivity().findViewById(R.id.editText_other)).setText(itemOther); ;
+
     }
 
     @Override
@@ -76,5 +90,14 @@ public class ListItemSpecificsFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void addItemToList(String s, ItemSpec i);
+        void setSpinner(Spinner s) ;
+        int getSelectedSpinner() ;
+        String getItemName() ;
+        String getItemPrice() ;
+        String getItemQuantity() ;
+        String getItemProtein() ;
+        String getItemCarbs() ;
+        String getItemFat() ;
+        String getItemOther() ;
     }
 }

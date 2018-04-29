@@ -143,6 +143,7 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="cancel"
         android:text="@string/button_cancel_adding_item" />
 
 </LinearLayout>

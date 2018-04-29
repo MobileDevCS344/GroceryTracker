@@ -3,6 +3,7 @@ package com.example.yangm89.grocerytracker;
 
 import android.app.DownloadManager;
 import android.app.LauncherActivity;
+import android.app.usage.ConfigurationStats;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentTransaction;
@@ -34,13 +35,14 @@ import java.util.HashMap;
 
 public class NewListActivity extends AppCompatActivity implements
         ListItemFragment.OnFragmentInteractionListener, ListItemSpecificsFragment.OnFragmentInteractionListener {
-    private String itemName;
     private ListItemFragment listItemFragment;
     private ListItemFragment listFragment ;
     private ListItemSpecificsFragment itemSpecificsFragment ;
     private HashMap<String, ItemSpec> itemMap = new HashMap<>() ;
-    private String username ;
+    private String username, itemName, itemPrice, itemQuantity, itemProtein, itemFat, itemCarbs, itemOther, listDate, listStore, listBudget, listRemainingBudget, list;
     private boolean listItemsVisible ;
+    private Spinner spinner ;
+    int selectedSpinner ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,32 @@ public class NewListActivity extends AppCompatActivity implements
         super.onSaveInstanceState(outState);
         outState.putBoolean(Constants.listItemsVisibility, listItemsVisible);
         outState.putSerializable(Constants.keyHashMapItemMap, itemMap);
+
+        if(!listItemsVisible)
+        {
+            outState.putInt(Constants.keyForItemCategoryNewList, spinner.getSelectedItemPosition()) ;
+            itemName = ((EditText) findViewById(R.id.editText_item)).getText().toString() ;
+            itemPrice = ((EditText) findViewById(R.id.number_price)).getText().toString() ;
+            itemQuantity = ((EditText) findViewById(R.id.editText_quantity)).getText().toString() ;
+            itemProtein = ((EditText) findViewById(R.id.editText_protein)).getText().toString() ;
+            itemFat = ((EditText) findViewById(R.id.editText_fat)).getText().toString() ;
+            itemCarbs = ((EditText) findViewById(R.id.editText_carbs)).getText().toString() ;
+            itemOther = ((EditText) findViewById(R.id.editText_carbs)).getText().toString() ;
+
+            outState.putString(Constants.keyForItemNameNewList, itemName) ;
+            outState.putString(Constants.keyforItemPriceNewList, itemPrice);
+            outState.putString(Constants.keyForItemQuantity, itemQuantity) ;
+            outState.putString(Constants.keyForItemProteinInfo, itemProtein) ;
+            outState.putString(Constants.keyForItemFatInfo, itemFat);
+            outState.putString(Constants.keyForITemCarbs, itemCarbs);
+            outState.putString(Constants.keyForItemOtherInfo, itemOther);
+        }
+
+        outState.putString(Constants.keyListDate, listDate);
+        outState.putString(Constants.keyForStoreNameInNewList, listStore);
+        outState.putString(Constants.keyBudgetListItem, listBudget);
+        outState.putString(Constants.keyRemaingingBudgetItem, listRemainingBudget);
+
     }
 
     @Override
@@ -89,6 +117,17 @@ public class NewListActivity extends AppCompatActivity implements
         super.onRestoreInstanceState(savedInstanceState);
         listItemsVisible = savedInstanceState.getBoolean(Constants.listItemsVisibility) ;
         itemMap = (HashMap<String,ItemSpec>) (savedInstanceState.getSerializable(Constants.keyHashMapItemMap)) ;
+        selectedSpinner = savedInstanceState.getInt(Constants.keyForItemCategoryNewList) ;
+        itemName = savedInstanceState.getString(Constants.keyItemNewListName) ;
+        itemPrice = savedInstanceState.getString(Constants.keyforItemPriceNewList) ;
+        itemQuantity = savedInstanceState.getString(Constants.keyForItemQuantity) ;
+        itemProtein = savedInstanceState.getString(Constants.keyForItemProteinInfo) ;
+        itemFat = savedInstanceState.getString(Constants.keyForItemFatInfo) ;
+        itemCarbs = savedInstanceState.getString(Constants.keyForITemCarbs) ;
+        itemOther  = savedInstanceState.getString(Constants.keyForItemOtherInfo) ;
+        listDate = savedInstanceState.getString(Constants.keyListDate) ;
+        listBudget = savedInstanceState.getString(Constants.keyBudgetListItem) ;
+        listRemainingBudget = savedInstanceState.getString(Constants.keyRemaingingBudgetItem) ;
 
         if(listItemsVisible)
         {
@@ -117,6 +156,54 @@ public class NewListActivity extends AppCompatActivity implements
         listItemsVisible = false ;
     }
 
+    //adds fragment with list to page
+    public void cancel(View view){
+        //create code for fragment transaction
+        listFragment = new ListItemFragment();
+        FragmentTransaction f = getSupportFragmentManager().beginTransaction();
+        f.replace(R.id.fragment_list_item_container, listFragment);
+        f.commit();
+
+        listItemsVisible = true ;
+    }
+
+    public String getItemName()
+    {
+        return itemName ;
+    }
+
+    public String getItemPrice ()
+    {
+        return itemPrice ;
+    }
+
+    public String getItemQuantity()
+    {
+        return itemQuantity ;
+    }
+
+    public String getItemProtein()
+    {
+        return itemProtein ;
+    }
+
+    public String getItemCarbs() {
+        return itemCarbs;
+    }
+
+    public String getItemFat() {
+        return itemFat;
+    }
+
+    public String getItemOther() {
+        return itemOther;
+    }
+
+    public int getSelectedSpinner()
+    {
+        return selectedSpinner ;
+    }
+
     //home button
     public void backToHomeActivity(View view){
         Intent intent = new Intent(this, HomeActivity.class);
@@ -125,27 +212,25 @@ public class NewListActivity extends AppCompatActivity implements
         finish();
     }
 
-    public String updateItemList() {
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < UniversalTables.items.size(); i++){
-            sb.append(UniversalTables.items.get(i) + "\n");
-        }
-
-        return sb.toString();
-    }
-
     //linked to new list specs fragment and takes back to new list activity with list item info
     public void backToNewListActivity(View view){
 
         //do something here
         String item = ((EditText) findViewById(R.id.editText_item)).getText().toString() ;
+        itemName = item ;
         String price = ((EditText) findViewById(R.id.number_price)).getText().toString() ;
+        itemPrice = price ;
         String quantity = ((EditText) findViewById(R.id.editText_quantity)).getText().toString() ;
+        itemQuantity = quantity ;
         String category = ((Spinner) findViewById(R.id.spinner_category)).getSelectedItem().toString() ;
         String protein = ((EditText) findViewById(R.id.editText_protein)).getText().toString() ;
+        itemProtein = protein ;
         String fat = ((EditText) findViewById(R.id.editText_fat)).getText().toString() ;
+        itemFat = fat ;
         String carbs = ((EditText) findViewById(R.id.editText_carbs)).getText().toString() ;
+        itemCarbs = carbs ;
         String other = ((EditText) findViewById(R.id.editText_other)).getText().toString() ;
+        itemOther = other ;
         ItemSpec i = new ItemSpec(item, price, quantity, category, protein, fat, carbs, other ) ;
         addItemToList(item, i);
 
@@ -170,9 +255,13 @@ public class NewListActivity extends AppCompatActivity implements
     public void saveList(View view)
     {
         String listName = ((EditText) findViewById(R.id.editText_list_name)).getText().toString() ;
+        list = listName ;
         String storeName = ((EditText) findViewById(R.id.editText_store_info)).getText().toString() ;
+        listStore = storeName ;
         String date = ((EditText) findViewById(R.id.number_date)).getText().toString() ;
+        listDate = date ;
         String budget = ((EditText) findViewById(R.id.number_budget)).getText().toString() ;
+        listBudget = budget ;
         String sqlDate ;
         RequestQueue queue = Volley.newRequestQueue(this) ;
 
@@ -230,6 +319,11 @@ public class NewListActivity extends AppCompatActivity implements
 
 
 
+    }
+
+    public void setSpinner(Spinner s)
+    {
+        spinner = s;
     }
 
     public boolean checkDateFormat(String date)
