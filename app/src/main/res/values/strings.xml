@@ -45,7 +45,11 @@
     <string name="button_options">Options</string>
     <string name="button_logout">Log Out</string>
     <string name="button_cancel_adding_item">Cancel</string>
-
+    <string name="textview_itemName">Item</string>
+    <string name="textview_initial_quantity">Initial Quantity</string>
+    <string name="textview_update_usage">Update Usage</string>
+    <string name="button_usage">+</string>
+    <string name="textview_remaining_quanityt">Quantity Remaining</string>
     <!-- Strings related to login -->
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>

@@ -79,11 +79,13 @@ public class HomeActivity extends AppCompatActivity {
 
     public void optionsActivity(View view){
         Intent intent = new Intent(this, OptionsActivity.class);
+        intent.putExtra(Constants.keyUsername, username) ;
         startActivity(intent);
     }
 
     public void viewPrevListsActivity(View view){
         Intent intent = new Intent(this, PreviousListsActivity.class);
+        intent.putExtra(Constants.keyUsername, username) ;
         startActivity(intent);
     }
 
@@ -95,6 +97,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void viewStatsActivity(View view){
         Intent intent = new Intent(this, MoreStatsActivity.class);
+        intent.putExtra(Constants.keyUsername, username) ;
         startActivity(intent);
     }
 

@@ -86,7 +86,8 @@ public class NewListActivity extends AppCompatActivity implements
 
         if(!listItemsVisible)
         {
-            outState.putInt(Constants.keyForItemCategoryNewList, spinner.getSelectedItemPosition()) ;
+            selectedSpinner = spinner.getSelectedItemPosition() ;
+            outState.putInt(Constants.keyForItemCategoryNewList, selectedSpinner) ;
             itemName = ((EditText) findViewById(R.id.editText_item)).getText().toString() ;
             itemPrice = ((EditText) findViewById(R.id.number_price)).getText().toString() ;
             itemQuantity = ((EditText) findViewById(R.id.editText_quantity)).getText().toString() ;
@@ -158,6 +159,16 @@ public class NewListActivity extends AppCompatActivity implements
 
     //adds fragment with list to page
     public void cancel(View view){
+        //clear all the names
+        itemName = "" ;
+        itemPrice = "";
+        itemQuantity = "";
+        itemProtein = "" ;
+        itemFat = "";
+        itemCarbs = "" ;
+        itemOther = "" ;
+        selectedSpinner = 0;
+
         //create code for fragment transaction
         listFragment = new ListItemFragment();
         FragmentTransaction f = getSupportFragmentManager().beginTransaction();
@@ -217,29 +228,37 @@ public class NewListActivity extends AppCompatActivity implements
 
         //do something here
         String item = ((EditText) findViewById(R.id.editText_item)).getText().toString() ;
-        itemName = item ;
+        itemName = "" ;
         String price = ((EditText) findViewById(R.id.number_price)).getText().toString() ;
-        itemPrice = price ;
+        itemPrice = "" ;
         String quantity = ((EditText) findViewById(R.id.editText_quantity)).getText().toString() ;
-        itemQuantity = quantity ;
+        itemQuantity = "" ;
         String category = ((Spinner) findViewById(R.id.spinner_category)).getSelectedItem().toString() ;
+        selectedSpinner = 0 ;
         String protein = ((EditText) findViewById(R.id.editText_protein)).getText().toString() ;
-        itemProtein = protein ;
+        itemProtein = "" ;
         String fat = ((EditText) findViewById(R.id.editText_fat)).getText().toString() ;
         itemFat = fat ;
         String carbs = ((EditText) findViewById(R.id.editText_carbs)).getText().toString() ;
         itemCarbs = carbs ;
         String other = ((EditText) findViewById(R.id.editText_other)).getText().toString() ;
-        itemOther = other ;
-        ItemSpec i = new ItemSpec(item, price, quantity, category, protein, fat, carbs, other ) ;
-        addItemToList(item, i);
+        itemOther = "" ;
+        if(item.equals(""))
+        {
+            Toast.makeText(this, "Item name is required.", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            ItemSpec i = new ItemSpec(item, price, quantity, category, protein, fat, carbs, other);
+            addItemToList(item, i);
+            listFragment = new ListItemFragment();
+            FragmentTransaction f = getSupportFragmentManager().beginTransaction();
+            f.replace(R.id.fragment_list_item_container, listFragment);
+            f.commit();
 
-        listFragment = new ListItemFragment();
-        FragmentTransaction f = getSupportFragmentManager().beginTransaction();
-        f.replace(R.id.fragment_list_item_container, listFragment);
-        f.commit();
+            listItemsVisible = true;
+        }
 
-        listItemsVisible = true ;
+
     }
 
     public void addItemToList(String item, ItemSpec itemSpec){
@@ -279,7 +298,8 @@ public class NewListActivity extends AppCompatActivity implements
                             public void onResponse(String response) {
                                 if(response.equals("Successfully inserted into database."))
                                 {
-                                    Toast.makeText(NewListActivity.this, response, Toast.LENGTH_SHORT).show() ;
+                                   // Toast.makeText(NewListActivity.this, response, Toast.LENGTH_SHORT).show() ;
+
                                     new SaveListItemsToDB().execute();
                                     Intent intent = new Intent(NewListActivity.this, HomeActivity.class) ;
                                     intent.putExtra(Constants.keyUsername, username) ;
@@ -361,6 +381,7 @@ public class NewListActivity extends AppCompatActivity implements
         protected Integer doInBackground(HashMap... hashMaps) {
             String listName = ((EditText) findViewById(R.id.editText_list_name)).getText().toString() ;
             String store = ((EditText) findViewById(R.id.editText_store_info)).getText().toString() ;
+            String date = ((EditText) findViewById(R.id.number_date)).getText().toString() ;
 
             if(!listName.equals("") && !store.equals(""))
             {
@@ -379,8 +400,8 @@ public class NewListActivity extends AppCompatActivity implements
 
                     RequestQueue queue = Volley.newRequestQueue(NewListActivity.this) ;
                     String url = Constants.root_url + "save_individual_items.php?username=" + username + "&listname=" + listName
-                            + "&itemname=" + itemName + "&price=" + price + "&quantity=" + quantity + "&protein=" + protein
-                            + "&carbs=" + carbs + "&other=" + other + "&fat=" + fat + "&category=" + category ;
+                            + "&itemname=" + item + "&price=" + price + "&quantity=" + quantity + "&protein=" + protein
+                            + "&carbs=" + carbs + "&other=" + other + "&fat=" + fat + "&category=" + category + "&date=" + date;
 
                     StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                         @Override

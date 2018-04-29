@@ -5,9 +5,9 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.regex.Pattern;
 
 public class Constants {
-    public static final String keyCategoryName = "keyCategoryName";
+    //public static final String keyCategoryName = "keyCategoryName";
     public static final String keyUsername = "allUsernamesAreUnique";
-    public static final String keyListItemActivity = "prevActivityIsListItemActivity";
+    //public static final String keyListItemActivity = "prevActivityIsListItemActivity";
     public static final String keyItemNewListName = "itemListNameFornewList";
     public static final String listItemsVisibility = "listItemsAreVisible" ;
     public final static String root_url = "http://webdev.cs.uwosh.edu/students/yangm89/GrocerTrackPhp/";
@@ -24,5 +24,8 @@ public class Constants {
     public final static String keyForItemOtherInfo = "keyForItemOtherInNewList" ;
     public final static String keyForItemQuantity = "keyForItemQuantityInNewList" ;
     public final static String keyForStoreNameInNewList = "keyForStoreNameInNewList" ;
-
+    public final static String keyForPrevListName = "keyForPrevListName"  ;
+    public final static String keyForPrevListStore = "keyForPrevListStore" ;
+    public final static String keyForPrevListBudget = "keyForPrevListBudget" ;
+    public final static String keyforPrevListDate = "keyforPrevListDate" ;
 }
