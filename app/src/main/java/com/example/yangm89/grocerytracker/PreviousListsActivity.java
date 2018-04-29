@@ -37,7 +37,6 @@ public class PreviousListsActivity extends AppCompatActivity {
 
         Intent intent = getIntent() ;
         username = intent.getStringExtra(Constants.keyUsername) ;
-        Toast.makeText(this, "username " + username, Toast.LENGTH_LONG).show() ;
 
         String url = Constants.root_url + "get_user_prev_lists.php?username=" + username;
         final LinearLayout layout = findViewById(R.id.linearLayout_prevList) ;

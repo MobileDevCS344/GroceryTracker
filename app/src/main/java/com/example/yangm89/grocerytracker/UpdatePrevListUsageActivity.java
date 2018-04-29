@@ -49,6 +49,7 @@ public class UpdatePrevListUsageActivity extends AppCompatActivity {
         final LinearLayout listLayout = findViewById(R.id.linearLayout_items) ;
         final LinearLayout quantityLayout = findViewById(R.id.linearLayout_quantity) ;
         final LinearLayout updateLayout = findViewById(R.id.linearLayout_update) ;
+        final LinearLayout remainingLayout = findViewById(R.id.linearLayout_remaining);
 
         String url = Constants.root_url + "get_list_items.php?username=" + username + "&listname=" + listName ;
 
@@ -78,6 +79,9 @@ public class UpdatePrevListUsageActivity extends AppCompatActivity {
                                     tQuant.setText(quantity) ;
                                     tQuant.setTextSize(18);
                                     quantityLayout.addView(tQuant) ;
+                                    final TextView remainingQuant = new TextView(UpdatePrevListUsageActivity.this) ;
+                                    remainingLayout.addView(remainingQuant) ;
+                                    updateUsage(username, listName, itemName, remainingLayout, remainingQuant) ;
                                     Button b = new Button(UpdatePrevListUsageActivity.this) ;
                                     b.setText(R.string.button_usage) ;
                                     updateLayout.addView(b);
@@ -86,7 +90,7 @@ public class UpdatePrevListUsageActivity extends AppCompatActivity {
                                         public void onClick(View view) {
                                             //do something here
                                             //Toast.makeText(UpdatePrevListUsageActivity.this,"Hello!", Toast.LENGTH_SHORT).show() ;
-
+                                            updateUsage(username, listName, itemName, remainingLayout, remainingQuant);
                                         }
                                     });
 
@@ -112,7 +116,7 @@ public class UpdatePrevListUsageActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest) ;
     }
 
-    public void updateUsage(String us, String list, String item)
+    public void updateUsage(String us, String list, String item, final LinearLayout l, final TextView t)
     {
         String url = Constants.root_url + "update_usage.php?username=" + us + "&listname=" + list +
                 "&item=" + item ;
@@ -125,7 +129,7 @@ public class UpdatePrevListUsageActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             double usage = Double.parseDouble(response) ;
-                            calculateUsage(originalQuantity, usage);
+                            calculateUsage(originalQuantity, usage, l, t);
                         }
                         catch(Exception e)
                         {
@@ -144,13 +148,17 @@ public class UpdatePrevListUsageActivity extends AppCompatActivity {
         queue.add(stringRequest) ;
     }
 
-    public void calculateUsage(double originalQuantity, double usage)
+    public void calculateUsage(double originalQuantity, double usage, LinearLayout l, TextView t)
     {
         //calculate remaining quantity
         double quantRemaining = originalQuantity - usage ;
-        TextView tRemain = new TextView(UpdatePrevListUsageActivity.this) ;
-        tRemain.setText(quantRemaining+"") ;
-        tRemain.setTextSize(18);
-        //update layout with the usage
+        if(quantRemaining >= 0)
+        {
+            t.setText(quantRemaining+"") ;
+        }
+        else {
+            Toast.makeText(this, "Cannot update usage of an item with quantity 0", Toast.LENGTH_SHORT).show()  ;
+        }
+
     }
 }

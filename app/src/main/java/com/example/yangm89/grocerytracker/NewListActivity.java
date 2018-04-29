@@ -119,7 +119,7 @@ public class NewListActivity extends AppCompatActivity implements
         listItemsVisible = savedInstanceState.getBoolean(Constants.listItemsVisibility) ;
         itemMap = (HashMap<String,ItemSpec>) (savedInstanceState.getSerializable(Constants.keyHashMapItemMap)) ;
         selectedSpinner = savedInstanceState.getInt(Constants.keyForItemCategoryNewList) ;
-        itemName = savedInstanceState.getString(Constants.keyItemNewListName) ;
+        itemName = savedInstanceState.getString(Constants.keyForItemNameNewList) ;
         itemPrice = savedInstanceState.getString(Constants.keyforItemPriceNewList) ;
         itemQuantity = savedInstanceState.getString(Constants.keyForItemQuantity) ;
         itemProtein = savedInstanceState.getString(Constants.keyForItemProteinInfo) ;

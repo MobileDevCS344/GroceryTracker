@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,35 +45,67 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra(Constants.keyUsername) ;
 
+        final LinearLayout layout = ((LinearLayout) findViewById(R.id.linearLayout_prev_list_container));
 
-
-
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-        {
-            RequestQueue queue = Volley.newRequestQueue(this);
+        if(getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE) {
             String url = Constants.root_url + "get_user_prev_lists.php?username=" + username;
-            JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
-                    Request.Method.GET, url, null, new
-                    Response.Listener<JSONArray>() {
+            RequestQueue queue = Volley.newRequestQueue(this);
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            //access the jsonobject
-                            try {
-                                iterateThroughJSObject(response);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                            //do something
+                            if (response.length() > 0) {
+                                for (int i = 0; i < response.length(); i++) {
+                                    try {
+                                        JSONObject list = response.getJSONObject(i);
+                                        final String listName = list.getString("ListName");
+                                        final String store = list.getString("Store");
+                                        final String budget = list.getString("Budget");
+                                        final String date = list.getString("Date");
+                                        TextView t = new TextView(HomeActivity.this);
+                                        t.setText(listName + ": " + store);
+                                        t.setTextSize(18);
+                                        layout.addView(t);
+                                        t.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                //call some method to go to the list
+                                                // Toast.makeText(PreviousListsActivity.this, "Hello!", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(HomeActivity.this, UpdatePrevListUsageActivity.class);
+                                                intent.putExtra(Constants.keyUsername, username);
+                                                intent.putExtra(Constants.keyForPrevListName, listName);
+                                                intent.putExtra(Constants.keyForPrevListStore, store);
+                                                intent.putExtra(Constants.keyForPrevListBudget, budget);
+                                                intent.putExtra(Constants.keyforPrevListDate, date);
+                                                startActivity(intent);
+                                            }
+                                        });
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(HomeActivity.this, "No previous lists are available.", Toast.LENGTH_SHORT).show();
                             }
                         }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    //do something here
-                }
-            }
-            ) ;
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(HomeActivity.this, "There was an error connecting to the database.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
 
-            queue.add(jsonObjectRequest) ;
+            queue.add(jsonArrayRequest);
         }
+
     }
 
 
@@ -100,7 +133,7 @@ public class HomeActivity extends AppCompatActivity {
         intent.putExtra(Constants.keyUsername, username) ;
         startActivity(intent);
     }
-
+/*
     public void iterateThroughJSObject(JSONArray jsonArray) throws JSONException {
         LinearLayout layout = ((LinearLayout) findViewById(R.id.linearLayout_prev_list_container));
 
@@ -117,6 +150,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
+    */
 
 
 }
