@@ -89,6 +89,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void newListActivity(View view){
         Intent intent = new Intent(this, NewListActivity.class);
+        intent.putExtra(Constants.keyUsername, username) ;
         startActivity(intent);
     }
 

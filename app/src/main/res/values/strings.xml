@@ -10,18 +10,19 @@
     <string name="edit_text_list_name">List Name</string>
     <string name="button_recent">Recent Items</string>
     <string name="textview_list_placeholder">List of items (Placeholder and Fragment)</string>
-    <string name="edit_text_store">Store Info</string>
-    <string name="edit_text_date">Date</string>
+    <string name="edit_text_store">Store</string>
+    <string name="edit_text_date">Date(MM/DD/YYYY)</string>
     <string name="edit_text_budget">Budget</string>
+    <string name="remaining_budget_label">Remaining Budget</string>
     <string name="number_quantity"># Quantity</string>
     <string name="number_price"># Price</string>
     <string name="textview_quantity">Quantity</string>
     <string name="textview_price">Price</string>
     <string name="button_add_item">Add Item To List</string>
-    <string name="textview_carbs">Carbs</string>
-    <string name="texetview_protein">Protein</string>
-    <string name="textview_fat">Fat</string>
-    <string name="textview_other">Other</string>
+    <string name="textview_carbs">Carbs (g) </string>
+    <string name="texetview_protein">Protein (g)</string>
+    <string name="textview_fat">Fat (g)</string>
+    <string name="textview_other">Other (g)</string>
     <string name="spinner_category">Category</string>
     <string name="edit_text_item">Item</string>
     <string name="button_view_stats">View More Statistics</string>
@@ -43,6 +44,7 @@
     <string name="content_desc_logo">Grocery Tracker Logo</string>
     <string name="button_options">Options</string>
     <string name="button_logout">Log Out</string>
+    <string name="button_cancel_adding_item">Cancel</string>
 
     <!-- Strings related to login -->
     <string name="prompt_password">Password</string>

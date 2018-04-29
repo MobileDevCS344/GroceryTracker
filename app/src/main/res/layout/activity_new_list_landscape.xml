@@ -5,6 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/button_back_home"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="backToHomeActivity"
+        android:text="@string/button_home"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:id="@+id/fragment_list_item_container"
         android:layout_width="337dp"
@@ -18,104 +31,113 @@
     </ScrollView>
 
     <EditText
-        android:id="@+id/editText_store_info2"
-        android:layout_width="207dp"
-        android:layout_height="42dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="76dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/edit_text_store"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText_list_name2"
-        android:layout_width="456dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="8dp"
+        android:id="@+id/editText_list_name"
+        android:layout_width="465dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="@string/edit_text_list_name"
         android:inputType="textPersonName"
-        android:text="@string/edit_text_list_name"
-        app:layout_constraintEnd_toStartOf="@+id/button_back_home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_save_new_list"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="206dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:text="@string/button_save_list"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:targetApi="lollipop"
-        android:layout_marginLeft="16dp" />
-
-    <Button
-        android:id="@+id/button_add_items"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="206dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="72dp"
-        android:layout_marginStart="16dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:onClick="listItemActivity"
-        android:text="@string/button_add_items"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:targetApi="lollipop"
-        android:layout_marginLeft="16dp" />
-
-    <EditText
-        android:id="@+id/number_budget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="207dp"
+        android:layout_height="287dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="128dp"
-        android:ems="10"
-        android:hint="@string/edit_text_budget"
-        android:inputType="numberDecimal"
-        android:text="@string/edit_text_budget"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_list_name">
 
-    <EditText
-        android:id="@+id/number_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="176dp"
-        android:ems="10"
-        android:hint="@string/edit_text_date"
-        android:inputType="date"
-        android:text="@string/edit_text_date"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/editText_store_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/button_back_home"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="@string/button_home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="8dp" />
+        <TextView
+            android:id="@+id/textView_store"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_text_store" />
+
+        <EditText
+            android:id="@+id/number_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/textView_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_text_date" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="104dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/number_budget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number|numberDecimal" />
+
+                <TextView
+                    android:id="@+id/textView_budget_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_text_budget" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView_remaining_budget"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/textView_remaining_budget_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/remaining_budget_label"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_add_items"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="listItemActivity"
+            android:text="@string/button_add_items" />
+
+        <Button
+            android:id="@+id/button_save_new_list"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="saveList"
+            android:text="@string/button_save_list" />
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

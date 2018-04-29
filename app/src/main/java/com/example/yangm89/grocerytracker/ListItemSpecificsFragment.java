@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -37,18 +38,23 @@ public class ListItemSpecificsFragment extends Fragment {
 
     public void onResume() {
         super.onResume();
-        //do something here
+
+        // do something here
         spinner = (Spinner) getActivity().findViewById(R.id.spinner_category) ;
         spinner = (Spinner) getActivity().findViewById(R.id.spinner_category);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.array_category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
+/*
         String item = ((EditText) getActivity().findViewById(R.id.editText_item)).getText().toString() ;
-        double price = Double.parseDouble(((EditText) getActivity().findViewById(R.id.number_price)).getText().toString()) ;
-        double quantity = Double.parseDouble(((EditText) getActivity().findViewById(R.id.editText_quantity)).getText().toString()) ;
+        String price = ((EditText) getActivity().findViewById(R.id.number_price)).getText().toString() ;
+        String quantity = ((EditText) getActivity().findViewById(R.id.editText_quantity)).getText().toString() ;
         String category = ((Spinner) getActivity().findViewById(R.id.spinner_category)).getSelectedItem().toString() ;
-
+        String protein = ((EditText) getActivity().findViewById(R.id.editText_protein)).getText().toString() ;
+        String fat = ((EditText) getActivity().findViewById(R.id.editText_fat)).getText().toString() ;
+        String carbs = ((EditText) getActivity().findViewById(R.id.editText_carbs)).getText().toString() ;
+        String other = ((EditText) getActivity().findViewById(R.id.editText_other)).getText().toString() ;
+        ItemSpec i = new ItemSpec(item, price, quantity, category, protein, fat, carbs, other ) ; */
     }
 
     @Override
@@ -69,6 +75,6 @@ public class ListItemSpecificsFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        //void addItemToList(String s);
+        void addItemToList(String s, ItemSpec i);
     }
 }

@@ -85,6 +85,10 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                             }
+                            else if(response.equals("Please check your username and password."))
+                            {
+                                Toast.makeText(LoginActivity.this, "Incorrect username and password.", Toast.LENGTH_SHORT).show() ;
+                            }
                         }
                     }, new Response.ErrorListener() {
 

@@ -14,7 +14,7 @@
         android:id="@+id/textView_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/edit_text_item" />
 
     <EditText
         android:id="@+id/number_price"
@@ -55,7 +55,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="260dp">
+        android:layout_height="207dp">
 
         <LinearLayout
             android:layout_width="147dp"
@@ -102,39 +102,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/editText_fat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/editText_carbs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <EditText
-                android:id="@+id/button_add_item_to_list"
+                android:id="@+id/editText_other"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
         </LinearLayout>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_add_item_to_list"
+        android:backgroundTint="@color/colorPrimary"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:onClick="backToNewListActivity"
         android:text="@string/button_add_item" />
+
+    <Button
+        android:id="@+id/button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_cancel_adding_item" />
 
 </LinearLayout>
