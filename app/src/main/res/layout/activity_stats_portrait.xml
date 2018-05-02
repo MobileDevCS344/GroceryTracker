@@ -19,6 +19,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <Button
+                android:id="@+id/button_home"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/button_home" />
+
             <TextView
                 android:id="@+id/textview_list_name"
                 android:layout_width="match_parent"

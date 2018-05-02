@@ -29,7 +29,6 @@
             android:name=".RegisterActivity"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/AppTheme" />
-        <activity android:name=".CreateAccountActivity" />
         <activity android:name=".HomeActivity"/>
         <activity android:name=".OptionsActivity"/>
         <activity android:name=".PreviousListsActivity"/>

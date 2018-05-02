@@ -28,4 +28,8 @@ public class Constants {
     public final static String keyForPrevListStore = "keyForPrevListStore" ;
     public final static String keyForPrevListBudget = "keyForPrevListBudget" ;
     public final static String keyforPrevListDate = "keyforPrevListDate" ;
+    public final static String keyForStatsListName = "keyForStatsListName" ;
+    public final static String keyForStatsListStore = "keyForStatsListStore" ;
+    public final static String keyForStatsListBudget = "keyForStatsListBudget" ;
+    public final static String keyForStatsListDate = "keyForStatsListDate" ;
 }

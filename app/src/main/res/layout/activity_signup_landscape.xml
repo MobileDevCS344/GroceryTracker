@@ -50,7 +50,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_create_account2"
+        android:id="@+id/button_create_account"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="198dp"
         android:layout_height="wrap_content"

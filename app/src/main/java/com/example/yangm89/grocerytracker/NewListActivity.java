@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +48,7 @@ public class NewListActivity extends AppCompatActivity implements
     private boolean listItemsVisible ;
     private Spinner spinner ;
     int selectedSpinner ;
+    String calculatedBudget, initialBudget ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,9 @@ public class NewListActivity extends AppCompatActivity implements
         //this leaves the keyboard hidden on load
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+        calculatedBudget = "" ;
+        initialBudget = "" ;
 
         Intent intent = getIntent();
         username = intent.getStringExtra(Constants.keyUsername) ;
@@ -279,11 +285,11 @@ public class NewListActivity extends AppCompatActivity implements
     public void saveList(View view)
     {
         MyDBContract.MyDbHelper mdbh = new MyDBContract.MyDbHelper(getApplicationContext());
-        SQLiteDatabase db = mdbh.getWritableDatabase();
+        final SQLiteDatabase db = mdbh.getWritableDatabase();
         SQLiteDatabase rdb = mdbh.getReadableDatabase();
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
 
-        String listName = ((EditText) findViewById(R.id.editText_list_name)).getText().toString() ;
+        final String listName = ((EditText) findViewById(R.id.editText_list_name)).getText().toString().trim() ;
         list = listName ;
         String storeName = ((EditText) findViewById(R.id.editText_store_info)).getText().toString() ;
         listStore = storeName ;
@@ -294,11 +300,11 @@ public class NewListActivity extends AppCompatActivity implements
         String sqlDate ;
         RequestQueue queue = Volley.newRequestQueue(this) ;
 
-        if(!listName.equals("") && !storeName.equals("") && !date.equals(""))
+        if(!listName.equals("") && !storeName.equals("") && !date.equals("") && !budget.equals(""))
         {
             //check local database if listname exists
             String selection = MyDBContract.DBEntry.COLUMN_NAME_LISTS + " GLOB ? " ;
-            String[] selectionArgs = { listName } ;
+            String[] selectionArgs = { list } ;
             String[] projection = { MyDBContract.DBEntry.COLUMN_NAME_LISTS, MyDBContract.DBEntry.COLUMN_NAME_USER_ID } ;
             String sortOrder = MyDBContract.DBEntry.COLUMN_NAME_LISTS + " DESC" ;
             Cursor cursor = rdb.query(MyDBContract.DBEntry.TABLE_NAME,
@@ -309,10 +315,12 @@ public class NewListActivity extends AppCompatActivity implements
                     null,
                     sortOrder) ;
 
+            Toast.makeText(this, cursor.getCount() + "", Toast.LENGTH_SHORT).show() ;
             if( cursor.getCount() == 0 ) {
                 if (checkDateFormat(date)) {
                     String[] dateArr = date.split("/");
                     sqlDate = dateArr[2] + "-" + dateArr[0] + "-" + dateArr[1];
+                    Toast.makeText(this, sqlDate, Toast.LENGTH_SHORT).show();
                     String url = Constants.root_url + "save_list.php?username=" + username + "&listname=" + listName
                             + "&store=" + storeName + "&date=" + sqlDate + "&budget=" + budget;
                     StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -321,7 +329,12 @@ public class NewListActivity extends AppCompatActivity implements
                                 public void onResponse(String response) {
                                     if (response.equals("Successfully inserted into database.")) {
                                         // Toast.makeText(NewListActivity.this, response, Toast.LENGTH_SHORT).show() ;
-
+                                        //put list into local database
+                                        values.put(MyDBContract.DBEntry.COLUMN_NAME_LISTS, list) ;
+                                        values.put(MyDBContract.DBEntry.COLUMN_NAME_USER_ID, username) ;
+                                        //create a row in the database
+                                        long rowId = db.insert(MyDBContract.DBEntry.TABLE_NAME, null, values) ;
+                                        //save list to remote database
                                         new SaveListItemsToDB().execute();
                                         Intent intent = new Intent(NewListActivity.this, HomeActivity.class);
                                         intent.putExtra(Constants.keyUsername, username);
@@ -358,6 +371,14 @@ public class NewListActivity extends AppCompatActivity implements
             else if(storeName.equals(""))
             {
                 Toast.makeText(this, "Store name is required.", Toast.LENGTH_SHORT).show();
+            }
+            else if(budget.equals(""))
+            {
+                Toast.makeText(this, "Budget is required.", Toast.LENGTH_SHORT).show() ;
+            }
+            else if(date.equals(""))
+            {
+                Toast.makeText(this, "Date0 is required.", Toast.LENGTH_SHORT).show() ;
             }
         }
 
@@ -454,6 +475,34 @@ public class NewListActivity extends AppCompatActivity implements
         {
             Toast.makeText(NewListActivity.this, "Successfully added all items to database.", Toast.LENGTH_SHORT).show() ;
         }
+    }
+
+
+    //set onchange listener for budget
+    public void getInitialBudget()
+    {
+        EditText budgetText = findViewById(R.id.number_budget) ;
+        budgetText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                initialBudget = ((EditText)findViewById(R.id.number_budget)).getText().toString() ;
+            }
+        });
+    }
+
+    public void calculateRemainingBudget(double initial, double remaining, double quantityt)
+    {
+
     }
 
 }

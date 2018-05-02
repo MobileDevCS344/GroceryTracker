@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                                         "Please register first.", Toast.LENGTH_SHORT).show();
                             } else if (response.equals("Successfully logged in.")) {
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                intent.putExtra(Constants.keyUsername, username);
+                                intent.putExtra(Constants.keyUsername, username.trim());
                                 startActivity(intent);
                                 finish();
                             }

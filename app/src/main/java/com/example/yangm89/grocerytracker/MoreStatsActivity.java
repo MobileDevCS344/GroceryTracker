@@ -62,7 +62,7 @@ public class MoreStatsActivity extends AppCompatActivity {
                                     final String budget = list.getString("Budget");
                                     final String date = list.getString("Date") ;
                                     TextView t = new TextView(MoreStatsActivity.this) ;
-                                    t.setText(listName + ": " + store) ;
+                                    t.setText(listName + ": " + store + ", " + date) ;
                                     t.setTextSize(18);
                                     layout.addView(t) ;
                                     t.setOnClickListener(new View.OnClickListener() {
@@ -72,10 +72,10 @@ public class MoreStatsActivity extends AppCompatActivity {
                                             // Toast.makeText(PreviousListsActivity.this, "Hello!", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(MoreStatsActivity.this, ListStatistics.class) ;
                                             intent.putExtra(Constants.keyUsername, username) ;
-                                            intent.putExtra(Constants.keyForPrevListName, listName) ;
-                                            intent.putExtra(Constants.keyForPrevListStore, store) ;
-                                            intent.putExtra(Constants.keyForPrevListBudget, budget) ;
-                                            intent.putExtra(Constants.keyforPrevListDate, date) ;
+                                            intent.putExtra(Constants.keyForStatsListName, listName) ;
+                                            intent.putExtra(Constants.keyForStatsListStore, store) ;
+                                            intent.putExtra(Constants.keyForStatsListBudget, budget) ;
+                                            intent.putExtra(Constants.keyForStatsListDate, date) ;
                                             startActivity(intent) ;
                                         }
                                     });
@@ -100,4 +100,13 @@ public class MoreStatsActivity extends AppCompatActivity {
 
         queue.add(jsonArrayRequest) ;
     }
+
+    //home button
+    public void backToHomeActivity(View view){
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra(Constants.keyUsername, username) ;
+        startActivity(intent);
+        finish();
+    }
+
 }

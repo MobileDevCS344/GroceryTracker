@@ -40,15 +40,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
-    private String username, mostRecentListName;
+    private String username;
     private int beef , chicken, bread, dairy , fish, fruits , lamb , pork ,
             ready , sauces , snacks , veal , vegetable , otherMeat , other  ;
     public PieChart pie ;
     private ArrayList<Double> budget;
-    private ArrayList<Double> dates ;
+    private ArrayList<String> dateArr ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +84,9 @@ public class HomeActivity extends AppCompatActivity {
         otherMeat = 0;
         other = 0 ;
         budget = new ArrayList<>() ;
-        dates = new ArrayList<>() ;
+        dateArr = new ArrayList<>() ;
 
-        final LinearLayout layout = ((LinearLayout) findViewById(R.id.linearLayout_prev_list_container));
+        final LinearLayout layout = findViewById(R.id.linearLayout_prev_list_container);
 
         if(getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE) {
@@ -276,7 +279,8 @@ public class HomeActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(HomeActivity.this, "There was an error connecting to the database.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(HomeActivity.this, error + "", Toast.LENGTH_SHORT).show();
+
                     }
                 }
         );
@@ -477,8 +481,10 @@ public class HomeActivity extends AppCompatActivity {
                                 try {
                                     JSONObject list = response.getJSONObject(i);
                                     String strBudget = list.getString("Budget") ;
+                                    String date = list.getString("Date") ;
                                     double b = Double.parseDouble(strBudget) ;
                                     budget.add(b) ;
+                                    dateArr.add(date) ;
 
 
                                 } catch (JSONException e) {
@@ -510,11 +516,50 @@ public class HomeActivity extends AppCompatActivity {
         DataPoint[] dp = new DataPoint[budget.size()] ;
         for(int i  = 0; i < budget.size(); i++)
         {
-            DataPoint d = new DataPoint(i, budget.get(i)) ;
-            dp[i] = d ;
+            String[] datePieces = dateArr.get(i).split("-") ;
+            Date d = generateDate(Integer.parseInt(datePieces[1]), Integer.parseInt(datePieces[2]), Integer.parseInt(datePieces[0])) ;
+            DataPoint dataPoint = new DataPoint(d, budget.get(i)) ;
+            dp[i] = dataPoint ;
         }
-       LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dp) ;
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dp) ;
         series.setTitle("Budget") ;
         lineGraph.addSeries(series);
+    }
+
+    public Date generateDate(int month, int day, int year)
+    {
+        int m ;
+        switch(month)
+        {
+            case (1) : m = Calendar.JANUARY  ;
+                        break ;
+            case (2) : m = Calendar.FEBRUARY ;
+                        break ;
+            case (3) : m = Calendar.MARCH ;
+                        break ;
+            case (4) : m = Calendar.APRIL ;
+                        break ;
+            case (5) : m = Calendar.MAY ;
+                        break ;
+            case (6) : m = Calendar.JUNE ;
+                        break ;
+            case (7) : m = Calendar.JULY ;
+                        break ;
+            case (8) : m = Calendar.AUGUST ;
+                        break ;
+            case (9) : m = Calendar.SEPTEMBER ;
+                        break ;
+            case (10) : m = Calendar.OCTOBER ;
+                        break ;
+            case (11) : m = Calendar.NOVEMBER ;
+                        break ;
+            case (12) : m = Calendar.DECEMBER ;
+                        break ;
+            default : m = 0;
+                        break ;
+        }
+        Date d = new GregorianCalendar(year, m, day).getTime() ;
+        return d ;
     }
 }

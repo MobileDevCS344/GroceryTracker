@@ -48,9 +48,6 @@ public final class MyDBContract {
 
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = " ,";
-    //  private static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + DBEntry.TABLE_NAME + " (" +
-    //         DBEntry._ID + " INTEGER PRIMARY KEY," + DBEntry.COLUMN_NAME_USER_ID  + TEXT_TYPE + COMMA_SEP +
-    //          DBEntry.COLUMN_NAME_PASSWORD + TEXT_TYPE + ")";
     private static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + DBEntry.TABLE_NAME + " (" +
             DBEntry.COLUMN_NAME_LISTS + " STRING PRIMARY KEY,"  + TEXT_TYPE + COMMA_SEP +
             DBEntry.COLUMN_NAME_USER_ID + TEXT_TYPE + ")";
