@@ -22,10 +22,45 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/button_home"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/button_home" />
+
+            <TextView
+                android:id="@+id/textview_list_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textView_store"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView_usage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/textview_usage_stats" />
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/graphView_line_graph"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <TextView
+                android:id="@+id/textView_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/textview_category_statsw" />
+
+            <com.androidplot.pie.PieChart
+                android:id="@+id/graphView_pie_graph"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
 
         </LinearLayout>
     </ScrollView>

@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout_main"
-        android:layout_width="368dp"
-        android:layout_height="468dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -24,12 +24,12 @@
         <com.androidplot.pie.PieChart
             android:id="@+id/graphView_pie_graph"
             android:layout_width="match_parent"
-            android:layout_height="160dp" />
+            android:layout_height="239dp" />
 
         <com.jjoe64.graphview.GraphView
+            android:id="@+id/graphView_line_graph"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:id="@+id/graphView_line_graph" />
+            android:layout_height="251dp" />
 
         <Button
             android:id="@+id/buton_view_stats"
@@ -61,17 +61,5 @@
             android:onClick="newListActivity"
             tools:targetApi="lollipop" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/button_options"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:onClick="optionsActivity"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="@string/button_options"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

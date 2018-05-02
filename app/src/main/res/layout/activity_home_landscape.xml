@@ -6,11 +6,12 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="405dp"
         android:layout_height="96dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:orientation="vertical"
         app:layout_constraintRight_toRightOf="parent"
@@ -48,14 +49,19 @@
 
     <LinearLayout
         android:id="@+id/linearLayout_stats"
-        android:layout_width="407dp"
-        android:layout_height="183dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="404dp"
+        android:layout_height="257dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/scrollView_prev_list_container">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/scrollView_prev_list_container"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <com.androidplot.pie.PieChart
             android:id="@+id/graphView_pie_graph"
@@ -69,26 +75,10 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_options"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="324dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="324dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:onClick="optionsActivity"
-        android:text="@string/button_options"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/scrollView_prev_list_container"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:id="@+id/scrollView_prev_list_container"
-        android:layout_width="141dp"
-        android:layout_height="343dp"
+        android:layout_width="248dp"
+        android:layout_height="362dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

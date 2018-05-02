@@ -47,7 +47,7 @@
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/graphView_line_graph"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="250dp" />
 
             <TextView
                 android:id="@+id/textView_categories"
@@ -58,7 +58,7 @@
             <com.androidplot.pie.PieChart
                 android:id="@+id/graphView_pie_graph"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="250dp" />
 
         </LinearLayout>
 
