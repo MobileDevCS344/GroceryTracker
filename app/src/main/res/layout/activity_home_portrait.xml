@@ -32,12 +32,12 @@
         <com.androidplot.pie.PieChart
             android:id="@+id/graphView_pie_graph"
             android:layout_width="match_parent"
-            android:layout_height="239dp" />
+            android:layout_height="245dp" />
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graphView_line_graph"
             android:layout_width="match_parent"
-            android:layout_height="251dp" />
+            android:layout_height="234dp" />
 
         <Button
             android:id="@+id/buton_view_stats"

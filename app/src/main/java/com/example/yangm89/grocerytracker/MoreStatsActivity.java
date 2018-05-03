@@ -102,7 +102,7 @@ public class MoreStatsActivity extends AppCompatActivity {
     }
 
     //home button
-    public void backToHomeActivity(View view){
+    public void home(View view){
         Intent intent = new Intent(this, HomeActivity.class);
         intent.putExtra(Constants.keyUsername, username) ;
         startActivity(intent);

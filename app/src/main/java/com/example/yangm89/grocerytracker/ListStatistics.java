@@ -1,6 +1,7 @@
 package com.example.yangm89.grocerytracker;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -27,18 +28,30 @@ public class ListStatistics extends AppCompatActivity{
 
     {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_stats_main);
-
+        if (getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.activity_stats_landscape);
+        } else {
+            setContentView(R.layout.activity_stats_portrait);
+        }
         //this leaves the keyboard hidden on load
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         Intent intent = getIntent();
-        username = intent.getStringExtra(Constants.keyUsername);
+        username = intent.getStringExtra(Constants.keyUsername) ;
+
 
         String url = Constants.root_url + "get_user_prev_lists.php?username=" + username;
         final LinearLayout layout = findViewById(R.id.linearLayout_prevList) ;
 
+    }
+
+    //home button
+    public void home(View view){
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra(Constants.keyUsername, username) ;
+        startActivity(intent);
+        finish();
     }
 }
