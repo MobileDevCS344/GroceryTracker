@@ -315,12 +315,10 @@ public class NewListActivity extends AppCompatActivity implements
                     null,
                     sortOrder) ;
 
-            Toast.makeText(this, cursor.getCount() + "", Toast.LENGTH_SHORT).show() ;
             if( cursor.getCount() == 0 ) {
                 if (checkDateFormat(date)) {
                     String[] dateArr = date.split("/");
                     sqlDate = dateArr[2] + "-" + dateArr[0] + "-" + dateArr[1];
-                    Toast.makeText(this, sqlDate, Toast.LENGTH_SHORT).show();
                     String url = Constants.root_url + "save_list.php?username=" + username + "&listname=" + listName
                             + "&store=" + storeName + "&date=" + sqlDate + "&budget=" + budget;
                     StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

@@ -53,6 +53,7 @@
     <string name="textview_most_recent_purchase_data">Most Recent Purchase Data</string>
     <string name="textview_usage_stats">Usage Statistics</string>
     <string name = "textview_category_statsw">Categories Purchased</string>
+    <string name="textview_home_pieChart_title">Categories of Most Recent List</string>
     <!-- Strings related to login -->
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>

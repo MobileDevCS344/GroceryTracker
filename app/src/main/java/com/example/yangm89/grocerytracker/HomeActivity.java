@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.EmbossMaskFilter;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.health.TimerStat;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -28,8 +31,18 @@ import com.androidplot.pie.PieChart;
 import com.androidplot.pie.PieRenderer;
 import com.androidplot.pie.Segment;
 import com.androidplot.pie.SegmentFormatter;
+import com.androidplot.ui.DynamicTableModel;
 import com.androidplot.util.PixelUtils;
+import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.SimpleXYSeries;
+import com.androidplot.xy.StepMode;
+import com.androidplot.xy.XYGraphWidget;
+import com.androidplot.xy.XYPlot;
+import com.androidplot.xy.XYSeries;
+import com.androidplot.xy.XYStepCalculator;
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.OnDataPointTapListener;
@@ -39,7 +52,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -146,22 +167,15 @@ public class HomeActivity extends AppCompatActivity {
             queue.add(jsonArrayRequest);
         }
 
-
+        generateMostRecentListPieGraph(username) ;
+        generateBudgetlineGraph(username);
     }
 
     @Override
     public void onStart()
     {
         super.onStart();
-        generateMostRecentListPieGraph(username) ;
-        generateBudgetlineGraph(username);
-    }
 
-
-    public void optionsActivity(View view){
-        Intent intent = new Intent(this, OptionsActivity.class);
-        intent.putExtra(Constants.keyUsername, username) ;
-        startActivity(intent);
     }
 
     public void viewPrevListsActivity(View view){
@@ -287,17 +301,14 @@ public class HomeActivity extends AppCompatActivity {
 
         queue.add(jsonArrayRequest);
 
+
     }
 
     public void generateGraph()
     {
-      //  Toast.makeText(this, "In generate graph", Toast.LENGTH_SHORT).show();
-     //   Toast.makeText(this, "beef: " + beef, Toast.LENGTH_SHORT).show();
-      //  Toast.makeText(this, "fruits: " + fruits, Toast.LENGTH_SHORT).show();
         pie = findViewById(R.id.graphView_pie_graph);
         pie.getLegend().setVisible(false);
-     //   Toast.makeText(this, "list name" + mostRecentListName, Toast.LENGTH_SHORT).show();
-       // pie.setTitle(mostRecentListName);
+        pie.setTitle("Categories of Most Recent List") ;
         final float padding = PixelUtils.dpToPix(30) ;
         pie.getPie().setPadding(padding, padding, padding, padding);
         EmbossMaskFilter emf = new EmbossMaskFilter(
@@ -455,11 +466,13 @@ public class HomeActivity extends AppCompatActivity {
             PieRenderer pieRenderer = pie.getRenderer(PieRenderer.class) ;
             pieRenderer.setDonutSize((float) 0.5, PieRenderer.DonutMode.PERCENT);
             pie.redraw();
+
         }
         else
         {
             Toast.makeText(this, "You have not created any lists yet.", Toast.LENGTH_LONG).show();
         }
+
     }
 
     public void generateBudgetlineGraph(String username)
@@ -486,7 +499,6 @@ public class HomeActivity extends AppCompatActivity {
                                     budget.add(b) ;
                                     dateArr.add(date) ;
 
-
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -512,54 +524,39 @@ public class HomeActivity extends AppCompatActivity {
 
     public void generateLinePoints()
     {
+
         GraphView lineGraph = findViewById(R.id.graphView_line_graph) ;
         DataPoint[] dp = new DataPoint[budget.size()] ;
         for(int i  = 0; i < budget.size(); i++)
         {
-            String[] datePieces = dateArr.get(i).split("-") ;
-            Date d = generateDate(Integer.parseInt(datePieces[1]), Integer.parseInt(datePieces[2]), Integer.parseInt(datePieces[0])) ;
-            DataPoint dataPoint = new DataPoint(d, budget.get(i)) ;
-            dp[i] = dataPoint ;
+            Date d = generateDate(dateArr.get(i)) ;
+            dp[i] = new DataPoint(d, budget.get(i)) ;
+
         }
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dp) ;
-        series.setTitle("Budget") ;
         lineGraph.addSeries(series);
+        lineGraph.setTitle("Line Graph of Budget");
+        lineGraph.setTitleColor(Color.BLACK);
+        lineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
+        lineGraph.getGridLabelRenderer().setNumHorizontalLabels(budget.size() + 1);
+
     }
 
-    public Date generateDate(int month, int day, int year)
+    public Date generateDate(String date)
     {
-        int m ;
-        switch(month)
-        {
-            case (1) : m = Calendar.JANUARY  ;
-                        break ;
-            case (2) : m = Calendar.FEBRUARY ;
-                        break ;
-            case (3) : m = Calendar.MARCH ;
-                        break ;
-            case (4) : m = Calendar.APRIL ;
-                        break ;
-            case (5) : m = Calendar.MAY ;
-                        break ;
-            case (6) : m = Calendar.JUNE ;
-                        break ;
-            case (7) : m = Calendar.JULY ;
-                        break ;
-            case (8) : m = Calendar.AUGUST ;
-                        break ;
-            case (9) : m = Calendar.SEPTEMBER ;
-                        break ;
-            case (10) : m = Calendar.OCTOBER ;
-                        break ;
-            case (11) : m = Calendar.NOVEMBER ;
-                        break ;
-            case (12) : m = Calendar.DECEMBER ;
-                        break ;
-            default : m = 0;
-                        break ;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date d = sdf.parse(date) ;
+            return d;
         }
-        Date d = new GregorianCalendar(year, m, day).getTime() ;
-        return d ;
+        catch (ParseException e)
+        {
+
+        }
+
+        return null ;
+
     }
 }
