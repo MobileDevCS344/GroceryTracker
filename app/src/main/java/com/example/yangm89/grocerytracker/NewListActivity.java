@@ -34,6 +34,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,8 +46,10 @@ public class NewListActivity extends AppCompatActivity implements
     private ListItemFragment listFragment ;
     private ListItemSpecificsFragment itemSpecificsFragment ;
     private HashMap<String, ItemSpec> itemMap = new HashMap<>() ;
-    private String username, itemName, itemPrice, itemQuantity, itemProtein, itemFat, itemCarbs, itemOther, listDate, listStore, listBudget, listRemainingBudget, list;
+    private String username, itemName, itemPrice, itemQuantity, itemProtein, itemFat, itemCarbs,
+            itemOther, listDate, listStore, listBudget, listRemainingBudget, list, budgetCalculation;
     private boolean listItemsVisible ;
+    private double quantAndPrice ;
     private Spinner spinner ;
     int selectedSpinner ;
     String calculatedBudget, initialBudget ;
@@ -65,6 +69,7 @@ public class NewListActivity extends AppCompatActivity implements
 
         calculatedBudget = "" ;
         initialBudget = "" ;
+        quantAndPrice = 0 ;
 
         Intent intent = getIntent();
         username = intent.getStringExtra(Constants.keyUsername) ;
@@ -80,7 +85,27 @@ public class NewListActivity extends AppCompatActivity implements
             listItemsVisible = true;
         }
 
-        //need to add local database that will keep all of the user's listnames so that there are no duplicates
+        EditText budgetText = findViewById(R.id.number_budget) ;
+        budgetText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                initialBudget = ((EditText)findViewById(R.id.number_budget)).getText().toString() ;
+                double iBudget = Double.parseDouble(initialBudget) ;
+                double updateBudget = iBudget - quantAndPrice ;
+                calculatedBudget = updateBudget + "" ;
+                ((TextView) findViewById(R.id.textView_remaining_budget)).setText(updateBudget + "");
+            }
+        });
     }
 
     @Override
@@ -107,6 +132,7 @@ public class NewListActivity extends AppCompatActivity implements
             itemCarbs = ((EditText) findViewById(R.id.editText_carbs)).getText().toString() ;
             itemOther = ((EditText) findViewById(R.id.editText_carbs)).getText().toString() ;
 
+
             outState.putString(Constants.keyForItemNameNewList, itemName) ;
             outState.putString(Constants.keyforItemPriceNewList, itemPrice);
             outState.putString(Constants.keyForItemQuantity, itemQuantity) ;
@@ -120,6 +146,7 @@ public class NewListActivity extends AppCompatActivity implements
         outState.putString(Constants.keyForStoreNameInNewList, listStore);
         outState.putString(Constants.keyBudgetListItem, listBudget);
         outState.putString(Constants.keyRemaingingBudgetItem, listRemainingBudget);
+        outState.putString(Constants.keyforCalculatedBudget, calculatedBudget);
 
     }
 
@@ -140,6 +167,8 @@ public class NewListActivity extends AppCompatActivity implements
         listDate = savedInstanceState.getString(Constants.keyListDate) ;
         listBudget = savedInstanceState.getString(Constants.keyBudgetListItem) ;
         listRemainingBudget = savedInstanceState.getString(Constants.keyRemaingingBudgetItem) ;
+        calculatedBudget = savedInstanceState.getString(Constants.keyforCalculatedBudget) ;
+        ((TextView) findViewById(R.id.textView_remaining_budget)).setText(calculatedBudget);
 
         if(listItemsVisible)
         {
@@ -258,6 +287,14 @@ public class NewListActivity extends AppCompatActivity implements
         {
             Toast.makeText(this, "Item name is required.", Toast.LENGTH_SHORT).show();
         }
+        else if(price.equals(""))
+        {
+            Toast.makeText(this, "Item price is required.", Toast.LENGTH_SHORT).show();
+        }
+        else if(quantity.equals(""))
+        {
+            Toast.makeText(this, "Item quantity is required.", Toast.LENGTH_SHORT).show();
+        }
         else {
             ItemSpec i = new ItemSpec(item, price, quantity, category, protein, fat, carbs, other);
             addItemToList(item, i);
@@ -272,12 +309,33 @@ public class NewListActivity extends AppCompatActivity implements
 
     }
 
+    public void calculatePriceXQuantity(String itemPrice, String itemQuantity)
+    {
+        double quant = Double.parseDouble(itemQuantity)  ;
+        double costOfItem = Double.parseDouble(itemPrice) ;
+        quantAndPrice = quant * costOfItem ;
+    }
+
     public void addItemToList(String item, ItemSpec itemSpec){
         if(itemMap.containsKey(item))
         {
             Toast.makeText(this, "Item names must be unique.", Toast.LENGTH_SHORT).show() ;
         }
         else {
+            calculatePriceXQuantity(itemSpec.getPrice(), itemSpec.getQuantity());
+            if(initialBudget.equals(""))
+            {
+                double updatedBudget = 0 - quantAndPrice ;
+                calculatedBudget = updatedBudget + "" ;
+                ((TextView) findViewById(R.id.textView_remaining_budget)).setText(updatedBudget + "");
+            }
+            else
+            {
+                double iBudget = Double.parseDouble(initialBudget) ;
+                double updateBudget = iBudget - quantAndPrice ;
+                calculatedBudget = updateBudget + "" ;
+                ((TextView) findViewById(R.id.textView_remaining_budget)).setText(updateBudget + "");
+            }
             itemMap.put(item, itemSpec);
         }
     }
@@ -475,32 +533,5 @@ public class NewListActivity extends AppCompatActivity implements
         }
     }
 
-
-    //set onchange listener for budget
-    public void getInitialBudget()
-    {
-        EditText budgetText = findViewById(R.id.number_budget) ;
-        budgetText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                initialBudget = ((EditText)findViewById(R.id.number_budget)).getText().toString() ;
-            }
-        });
-    }
-
-    public void calculateRemainingBudget(double initial, double remaining, double quantityt)
-    {
-
-    }
 
 }

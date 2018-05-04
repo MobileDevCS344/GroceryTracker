@@ -22,6 +22,7 @@ public class Constants {
     public final static String keyForItemFatInfo = "keyForItemFatInNewList" ;
     public final static String keyForITemCarbs = "keyForItemCarbsInNewList" ;
     public final static String keyForItemOtherInfo = "keyForItemOtherInNewList" ;
+    public final static String keyforCalculatedBudget = "keyForCalculatedBudget"  ;
     public final static String keyForItemQuantity = "keyForItemQuantityInNewList" ;
     public final static String keyForStoreNameInNewList = "keyForStoreNameInNewList" ;
     public final static String keyForPrevListName = "keyForPrevListName"  ;
