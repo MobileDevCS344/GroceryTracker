@@ -83,10 +83,7 @@ public class MoreStatsActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 } }
                         }
-                        else
-                        {
-                            Toast.makeText(MoreStatsActivity.this, "No previous lists are available for statitics.", Toast.LENGTH_SHORT).show();
-                        }
+
                     }
                 },
                 new Response.ErrorListener() {

@@ -505,8 +505,6 @@ public class HomeActivity extends AppCompatActivity {
                             }
 
                             generateLinePoints();
-                        } else {
-                            Toast.makeText(HomeActivity.this, "No previous lists are available.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
