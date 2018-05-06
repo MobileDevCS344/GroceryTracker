@@ -69,7 +69,7 @@ public class PreviousListsActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
                                             //call some method to go to the list
-                                           // Toast.makeText(PreviousListsActivity.this, "Hello!", Toast.LENGTH_SHORT).show();
+
                                             Intent intent = new Intent(PreviousListsActivity.this, UpdatePrevListUsageActivity.class) ;
                                             intent.putExtra(Constants.keyUsername, username) ;
                                             intent.putExtra(Constants.keyForPrevListName, listName) ;

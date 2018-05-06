@@ -68,8 +68,7 @@ public class MoreStatsActivity extends AppCompatActivity {
                                     t.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            //call some method to go to the list
-                                            // Toast.makeText(PreviousListsActivity.this, "Hello!", Toast.LENGTH_SHORT).show();
+
                                             Intent intent = new Intent(MoreStatsActivity.this, ListStatistics.class) ;
                                             intent.putExtra(Constants.keyUsername, username) ;
                                             intent.putExtra(Constants.keyForStatsListName, listName) ;

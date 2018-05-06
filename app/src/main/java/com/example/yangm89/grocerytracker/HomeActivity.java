@@ -218,9 +218,6 @@ public class HomeActivity extends AppCompatActivity {
                                     JSONObject list = response.getJSONObject(i);
                                     String category = list.getString("Category").trim() ;
                                     String quantity = list.getString("Quantity").trim() ;
-                                  //  Toast.makeText(HomeActivity.this, " i : " + i + " " , Toast.LENGTH_SHORT).show();
-                                  //  Toast.makeText(HomeActivity.this, " category : " + category , Toast.LENGTH_SHORT).show();
-                                  //  mostRecentListName = list.getString("ListName") ;
                                     if(category.equals("Beef"))
                                     {
                                         beef += Double.parseDouble(quantity) ;
@@ -296,7 +293,6 @@ public class HomeActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(HomeActivity.this, error + "", Toast.LENGTH_SHORT).show();
 
                     }
                 }

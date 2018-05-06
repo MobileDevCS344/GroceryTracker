@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class UpdatePrevListUsageActivity extends AppCompatActivity {
     String listName, store, budget, listDate, username ;
-    double remainingQuantity, originalQuantity ;
+    double  originalQuantity ;
     ArrayList<TextView> textViewArrayList ;
 
     @Override
@@ -105,8 +105,6 @@ public class UpdatePrevListUsageActivity extends AppCompatActivity {
                                     b.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            //do something here
-                                            //  Toast.makeText(UpdatePrevListUsageActivity.this,"Hello!", Toast.LENGTH_SHORT).show() ;
                                             updateUsage(username, listName, itemName, remainingQuant);
                                         }
                                     });

@@ -39,19 +39,6 @@ public class ListItemFragment extends Fragment {
 
     public void onResume() {
         super.onResume();
-       // String temp = mListener.updateItemList();
-       // TextView list = ((TextView) getActivity().findViewById(R.id.textview_list_items));
-        //list.setText(temp);
-
-   /*     HashMap<String, ItemSpec> items = mListener.getItemMap() ;
-        LinearLayout layout = ((LinearLayout) getActivity().findViewById(R.id.linear_layout_items_container)) ;
-        for(String key : items.keySet())
-        {
-            ItemSpec i = items.get(key) ;
-            TextView t = new TextView(getActivity()) ;
-
-        }
-        */
 
         mListener.printListItems();
     }
@@ -75,7 +62,6 @@ public class ListItemFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         //3 - Ensure the activity implements this activity
-        HashMap<String, ItemSpec> getItemMap() ;
         void printListItems() ;
     }
 }

@@ -208,7 +208,7 @@ public class ListStatistics extends AppCompatActivity {
                             }
 
                             generateGraph();
-                           // Toast.makeText(ListStatistics.this, itemsArrayList.size() + "", Toast.LENGTH_SHORT).show();
+
                             generateLineGraph();
 
 
@@ -220,7 +220,7 @@ public class ListStatistics extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(HomeActivity.this, error + "", Toast.LENGTH_SHORT).show();
+
 
                     }
                 }
