@@ -11,11 +11,12 @@
         android:layout_height="160dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/imageView5">
 
         <EditText
             android:id="@+id/edittext_username"
@@ -60,15 +61,14 @@
         tools:targetApi="lollipop" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="304dp"
-        android:layout_marginStart="304dp"
-        android:layout_marginTop="28dp"
-        android:contentDescription="@string/content_desc_logo"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/imageView5"
+        android:layout_width="97dp"
+        android:layout_height="89dp"
+        android:layout_marginEnd="292dp"
+        android:layout_marginRight="292dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@drawable/logo" />
 
 </android.support.constraint.ConstraintLayout>
