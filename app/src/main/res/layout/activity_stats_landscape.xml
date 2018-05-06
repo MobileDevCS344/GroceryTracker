@@ -47,10 +47,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/textview_usage_stats" />
 
-            <com.jjoe64.graphview.GraphView
-                android:id="@+id/graphView_line_graph"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="200dp">
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_usageBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
 
             <TextView
                 android:id="@+id/textView_categories"

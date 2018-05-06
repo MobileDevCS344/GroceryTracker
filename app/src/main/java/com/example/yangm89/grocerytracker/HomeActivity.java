@@ -68,7 +68,7 @@ import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
     private String username;
-    private int beef , chicken, bread, dairy , fish, fruits , lamb , pork ,
+    private double beef , chicken, bread, dairy , fish, fruits , lamb , pork ,
             ready , sauces , snacks , veal , vegetable , otherMeat , other  ;
     public PieChart pie ;
     private ArrayList<Double> budget;
@@ -215,68 +215,69 @@ public class HomeActivity extends AppCompatActivity {
                                 try {
                                     JSONObject list = response.getJSONObject(i);
                                     String category = list.getString("Category").trim() ;
+                                    String quantity = list.getString("Quantity").trim() ;
                                   //  Toast.makeText(HomeActivity.this, " i : " + i + " " , Toast.LENGTH_SHORT).show();
                                   //  Toast.makeText(HomeActivity.this, " category : " + category , Toast.LENGTH_SHORT).show();
                                   //  mostRecentListName = list.getString("ListName") ;
                                     if(category.equals("Beef"))
                                     {
-                                        beef++ ;
+                                        beef += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Chicken"))
                                     {
-                                        chicken++ ;
+                                        chicken += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Bread"))
                                     {
-                                        bread++ ;
+                                        bread += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Dairy"))
                                     {
-                                        dairy++ ;
+                                        dairy += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Fish"))
                                     {
-                                        fish++ ;
+                                        fish += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Fruits"))
                                     {
-                                        fruits++ ;
+                                        fruits += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Lamb"))
                                     {
-                                        lamb++ ;
+                                        lamb += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Pork"))
                                     {
-                                        pork++ ;
+                                        pork += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Ready"))
                                     {
-                                        ready++ ;
+                                        ready += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Sauces"))
                                     {
-                                        sauces++;
+                                        sauces += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Snacks"))
                                     {
-                                        snacks++ ;
+                                        snacks += Double.parseDouble(quantity) ;;
                                     }
                                     if(category.equals("Veal"))
                                     {
-                                        veal++ ;
+                                        veal += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Vegetables"))
                                     {
-                                        vegetable++ ;
+                                        vegetable += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Meat-Other"))
                                     {
-                                        otherMeat++ ;
+                                        otherMeat += Double.parseDouble(quantity) ;
                                     }
                                     if(category.equals("Other"))
                                     {
-                                        other++ ;
+                                        other += Double.parseDouble(quantity) ;
                                     }
 
                                 } catch (JSONException e) {
@@ -306,6 +307,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void generateGraph()
     {
+
         pie = findViewById(R.id.graphView_pie_graph);
         pie.getLegend().setVisible(false);
         pie.setTitle("Categories of Most Recent List") ;
