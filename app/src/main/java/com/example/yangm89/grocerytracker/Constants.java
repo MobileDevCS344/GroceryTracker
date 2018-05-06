@@ -33,4 +33,5 @@ public class Constants {
     public final static String keyForStatsListStore = "keyForStatsListStore" ;
     public final static String keyForStatsListBudget = "keyForStatsListBudget" ;
     public final static String keyForStatsListDate = "keyForStatsListDate" ;
+    public final static String keyForCounterForAdding = "keyForCounterForAdding" ;
 }

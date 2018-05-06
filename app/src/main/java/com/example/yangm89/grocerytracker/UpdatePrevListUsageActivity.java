@@ -198,4 +198,12 @@ public class UpdatePrevListUsageActivity extends AppCompatActivity {
 
         queue.add(stringRequest) ;
     }
+
+    //home button
+    public void home(View view){
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra(Constants.keyUsername, username) ;
+        startActivity(intent);
+        finish();
+    }
 }

@@ -182,6 +182,8 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PreviousListsActivity.class);
         intent.putExtra(Constants.keyUsername, username) ;
         startActivity(intent);
+
+        Toast.makeText(HomeActivity.this, "WELCOME", Toast.LENGTH_SHORT).show();
     }
 
     public void newListActivity(View view){
@@ -287,7 +289,7 @@ public class HomeActivity extends AppCompatActivity {
 
                             generateGraph();
                         } else {
-                            Toast.makeText(HomeActivity.this, "No previous lists are available.", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 },

@@ -52,20 +52,15 @@ import java.util.Set;
 
 public class ListStatistics extends AppCompatActivity {
     String username, listname, listdate, store, budget;
-    private HashMap<String, Integer> countArr;
     private ArrayList<String> dateArr;
-    private ArrayList<Date> dates;
     private HashMap<String, ArrayList> itemUsageCount ;
     private HashMap<String, HashMap<String, WrapperDateClass>> itemCountWithDates ;
     ArrayList<HashMap<String, WrapperDateClass>> wrapperArr ;
     private ArrayList<String> itemsArrayList;
     private HashMap<String, ArrayList> itemDataPointMap ;
-    private HashMap<String ,WrapperDateClass> wrapperMap ;
     private double beef, chicken, bread, dairy, fish, fruits, lamb, pork,
             ready, sauces, snacks, veal, vegetable, otherMeat, other;
-    private GraphView lineGraph ;
     private LinearLayout textBox ;
-    boolean done ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -91,14 +86,10 @@ public class ListStatistics extends AppCompatActivity {
         String textForTextView = listname + ": " + store + " $" + budget + "\n " + listdate;
         ((TextView) (findViewById(R.id.textview_list_name))).setText(textForTextView);
         textBox = findViewById(R.id.linearlayout_usageBox) ;
-        countArr = new HashMap<>();
         itemUsageCount = new HashMap<>() ;
         itemCountWithDates = new HashMap<>() ;
         wrapperArr  = new ArrayList<>() ;
         itemDataPointMap = new HashMap<>() ;
-
-        lineGraph = findViewById(R.id.graphView_line_graph) ;
-        done = false ;
 
 
         itemsArrayList = new ArrayList<>();
@@ -396,7 +387,6 @@ public class ListStatistics extends AppCompatActivity {
 
     public void generateLineGraph() {
         for (int j = 0; j < itemsArrayList.size(); j++) {
-//            Toast.makeText(this, "in generateLineGraph " + itemsArrayList.get(j), Toast.LENGTH_SHORT).show();
             requestForLineGraphData(itemsArrayList.get(j));
 
         }
@@ -404,8 +394,7 @@ public class ListStatistics extends AppCompatActivity {
     }
 
     public void requestForLineGraphData(final String itemName) {
-        dateArr = new ArrayList<>();
-     //   Toast.makeText(this, "In requestForLineGraph", Toast.LENGTH_SHORT).show();
+
         String url = Constants.root_url + "list_item_usage.php?username=" + username +
                 "&listname=" + listname + "&item=" + itemName;
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -414,16 +403,17 @@ public class ListStatistics extends AppCompatActivity {
                 url,
                 null,
                 new Response.Listener<JSONArray>() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onResponse(JSONArray response) {
                         //do something
-                  //      Toast.makeText(ListStatistics.this, "IN RESPONSE LOOP", Toast.LENGTH_SHORT).show();
                         if (response.length() > 0) {
+                            dateArr = new ArrayList<>();
                             for (int i = 0; i < response.length(); i++) {
                                 try {
                                     JSONObject list = response.getJSONObject(i);
                                     String date = list.getString("UsageDate");
-                                 //   Toast.makeText(ListStatistics.this, "Date " + date + " Item " + itemName, Toast.LENGTH_SHORT).show();
+
                                     dateArr.add(date) ;
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -431,11 +421,8 @@ public class ListStatistics extends AppCompatActivity {
                             }
 
                             itemUsageCount.put(itemName, dateArr ) ;
-                            wrapperMap = new HashMap<>() ;
                             generateDateCount(itemName);
-                            Toast.makeText(ListStatistics.this, "itemDataPointMap size " + itemDataPointMap.size(), Toast.LENGTH_SHORT).show() ;
-                          //  generateGUI(itemName) ;
-                            generateText(itemName) ;
+                            setText(itemName) ;
 
                         } else {
                             Toast.makeText(ListStatistics.this, "No previous lists are available.", Toast.LENGTH_SHORT).show();
@@ -454,21 +441,12 @@ public class ListStatistics extends AppCompatActivity {
 
     }
 
-    public void generateText(String item)
-    {
-        TextView textView = new TextView(this) ;
-        String display = item + ": " ;
-        SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yyyy") ;
-
-    }
-
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void generateDateCount(String item)
     {
+        HashMap<String ,WrapperDateClass> wrapperMap = new HashMap<>() ;
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd") ;
-
-      //  Toast.makeText(ListStatistics.this, "in generateDateCount", Toast.LENGTH_SHORT).show();
         ArrayList dates = itemUsageCount.get(item) ;
         for(int i = 0; i < dates.size(); i++)
         {
@@ -481,27 +459,29 @@ public class ListStatistics extends AppCompatActivity {
                 int count = wrapper.getCount();
                 count++ ;
                 wrapper.setCount(count);
-               // Toast.makeText(ListStatistics.this, "In IF STATMENT", Toast.LENGTH_SHORT).show();
+                wrapperMap.put(fmtDate, wrapper) ;
             }
             else
             {
                 WrapperDateClass wrapper = new WrapperDateClass(fmtDate, d) ;
                 wrapperMap.put(fmtDate, wrapper) ;
-               // Toast.makeText(ListStatistics.this, "In ELSE STATMENT", Toast.LENGTH_SHORT).show();
             }
         }
 
-      //  Toast.makeText(ListStatistics.this, "wrappermap size " + wrapperMap.size() + "item " + item, Toast.LENGTH_SHORT).show();
         itemCountWithDates.put(item, wrapperMap) ;
-     //   generateLinePoints(item) ;
+    }
 
-        Set<String> wrapperKeys = wrapperMap.keySet() ;
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public void setText(String item)
+    {
+        HashMap<String, WrapperDateClass> tempWrapperMap = itemCountWithDates.get(item) ;
+        Set<String> wrapperKeys = tempWrapperMap.keySet() ;
         TextView textView = new TextView(this) ;
         String display = item + ": " ;
         SimpleDateFormat printFmt = new SimpleDateFormat("MM/dd/yyyy") ;
         for(String wKey : wrapperKeys)
         {
-            WrapperDateClass wrapperItem = wrapperMap.get(wKey)  ;
+            WrapperDateClass wrapperItem = tempWrapperMap.get(wKey)  ;
             Date date = wrapperItem.getDate() ;
             int c = wrapperItem.getCount() ;
             display = display + "\n\t" + printFmt.format(date) + " used " + c ;

@@ -35,9 +35,10 @@
                 android:id="@+id/button_home"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
-                android:backgroundTint="@color/colorPrimary"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:backgroundTint="@color/colorPrimary"
+                android:onClick="homeFromPrevList"
+                android:text="@string/button_home" />
         </LinearLayout>
     </ScrollView>
 

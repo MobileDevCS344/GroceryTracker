@@ -100,4 +100,13 @@ public class PreviousListsActivity extends AppCompatActivity {
 
         queue.add(jsonArrayRequest) ;
     }
+
+
+    //home button
+    public void homeFromPrevList(View view){
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra(Constants.keyUsername, username) ;
+        startActivity(intent);
+        finish();
+    }
 }

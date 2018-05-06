@@ -53,6 +53,7 @@ public class NewListActivity extends AppCompatActivity implements
     private Spinner spinner ;
     int selectedSpinner ;
     String calculatedBudget, initialBudget ;
+    int firstAdd ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class NewListActivity extends AppCompatActivity implements
         calculatedBudget = "" ;
         initialBudget = "" ;
         quantAndPrice = 0 ;
+        firstAdd = 0;
 
         Intent intent = getIntent();
         username = intent.getStringExtra(Constants.keyUsername) ;
@@ -119,6 +121,7 @@ public class NewListActivity extends AppCompatActivity implements
         super.onSaveInstanceState(outState);
         outState.putBoolean(Constants.listItemsVisibility, listItemsVisible);
         outState.putSerializable(Constants.keyHashMapItemMap, itemMap);
+        outState.putInt(Constants.keyForCounterForAdding, firstAdd);
 
         if(!listItemsVisible)
         {
@@ -169,6 +172,7 @@ public class NewListActivity extends AppCompatActivity implements
         listRemainingBudget = savedInstanceState.getString(Constants.keyRemaingingBudgetItem) ;
         calculatedBudget = savedInstanceState.getString(Constants.keyforCalculatedBudget) ;
         ((TextView) findViewById(R.id.textView_remaining_budget)).setText(calculatedBudget);
+        firstAdd = savedInstanceState.getInt(Constants.keyForCounterForAdding) ;
 
         if(listItemsVisible)
         {
@@ -278,9 +282,9 @@ public class NewListActivity extends AppCompatActivity implements
         String protein = ((EditText) findViewById(R.id.editText_protein)).getText().toString() ;
         itemProtein = "" ;
         String fat = ((EditText) findViewById(R.id.editText_fat)).getText().toString() ;
-        itemFat = fat ;
+        itemFat = "" ;
         String carbs = ((EditText) findViewById(R.id.editText_carbs)).getText().toString() ;
-        itemCarbs = carbs ;
+        itemCarbs = "" ;
         String other = ((EditText) findViewById(R.id.editText_other)).getText().toString() ;
         itemOther = "" ;
         if(item.equals(""))
@@ -297,6 +301,7 @@ public class NewListActivity extends AppCompatActivity implements
         }
         else {
             ItemSpec i = new ItemSpec(item, price, quantity, category, protein, fat, carbs, other);
+            calculatePriceXQuantity(price, quantity);
             addItemToList(item, i);
             listFragment = new ListItemFragment();
             FragmentTransaction f = getSupportFragmentManager().beginTransaction();
@@ -328,13 +333,21 @@ public class NewListActivity extends AppCompatActivity implements
                 double updatedBudget = 0 - quantAndPrice ;
                 calculatedBudget = updatedBudget + "" ;
                 ((TextView) findViewById(R.id.textView_remaining_budget)).setText(updatedBudget + "");
+                firstAdd++ ;
             }
-            else
+            else if(firstAdd == 0)
             {
                 double iBudget = Double.parseDouble(initialBudget) ;
                 double updateBudget = iBudget - quantAndPrice ;
                 calculatedBudget = updateBudget + "" ;
                 ((TextView) findViewById(R.id.textView_remaining_budget)).setText(updateBudget + "");
+                firstAdd++ ;
+            }
+            else
+            {
+                double updatedBudget = Double.parseDouble(calculatedBudget) - quantAndPrice ;
+                calculatedBudget = updatedBudget + "" ;
+                ((TextView) findViewById(R.id.textView_remaining_budget)).setText(updatedBudget + "");
             }
             itemMap.put(item, itemSpec);
         }
